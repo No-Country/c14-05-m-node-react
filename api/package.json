@@ -1,13 +1,33 @@
 {
+  "name": "c14-05-m-node-react",
+  "version": "1.0.0",
+  "description": "backend para aplicación de manejo de app de eventos",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/No-Country/c14-05-m-node-react"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/No-Country/c14-05-m-node-react/issues"
+  },
+  "homepage": "https://github.com/No-Country/c14-05-m-node-react#readme",
   "dependencies": {
     "@babel/core": "^7.23.0",
     "@babel/node": "^7.22.19",
     "@babel/preset-env": "^7.22.20",
     "axios": "^1.5.1",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
     "node.js": "^0.0.1-security",
     "nodemon": "^3.0.1",
+    "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.33.0"
   }
