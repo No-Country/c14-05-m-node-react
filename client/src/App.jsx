@@ -13,7 +13,7 @@ function App() {
     //Esto verifica que el usuario este logueado cada vez que monta el componente
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-
+      console.log(user);
       if (currentUser) {
       }
     });

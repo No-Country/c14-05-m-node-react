@@ -27,7 +27,7 @@ function RegisterPage() {
     onSubmit: ({ email, password }) => {
       createNewUser(email, password);
       formik.resetForm();
-      navigate("/login");
+      navigate("/");
     },
   });
 
@@ -98,8 +98,8 @@ function RegisterPage() {
         </button>
         <h2 className="form-subtitle">
           Ya tenes cuenta?
-          <Link to={"login"} className="registrate-link">
-            Incia Sesion
+          <Link to={"../"} className="registrate-link">
+            Inicia Sesion
           </Link>
           .
         </h2>
