@@ -17,8 +17,8 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn, Country } = require('./src/db.js');
+const server = require('./app.js');
+const { conn, Country } = require('./db.js');
 const axios = require("axios")
 const cors = require("cors");
 
@@ -29,7 +29,8 @@ conn.sync({ force: true }).then(() => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
 
 
-    
+  })
+})
 
 
 
