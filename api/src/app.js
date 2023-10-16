@@ -2,8 +2,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-//const routes = require("./Routes/index");
-//const mainRouter = require("./Routes");
+const routes = require("./Routes/index");
+const mainRouter = require("./Routes");
 const cors = require("cors");
 
 require("./db.js");
@@ -30,8 +30,8 @@ server.use((req, res, next) => {
   next();
 });
 
-//server.use("/", routes);
-//server.use(mainRouter);
+server.use("/", routes);
+server.use(mainRouter);
 
 // Error catching endware.
 server.use((err, req, res, next) => {
