@@ -1,6 +1,7 @@
 const {
   userRegister,
   deleteUserById,
+  updateUserById,
 } = require("../Controllers/userController");
 
 const userRegisterHandler = async (req, res) => {
@@ -28,7 +29,19 @@ const deleteUserByIdHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+const updateUserByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const updatedUser = await updateUserById(id, body);
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 module.exports = {
   userRegisterHandler,
   deleteUserByIdHandler,
+  updateUserByIdHandler,
 };

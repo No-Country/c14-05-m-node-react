@@ -21,7 +21,15 @@ const deleteUserById = async (id) => {
   const remainingUsers = await user.findAll();
   return remainingUsers;
 };
+
+const updateUserById = async (id, body) => {
+  const userToUpdate = await user.findByPk(id);
+  if (!userToUpdate) throw new Error(`User with id ${id} not found`);
+  await userToUpdate.update(body);
+  return userToUpdate;
+};
 module.exports = {
   userRegister,
   deleteUserById,
+  updateUserById,
 };
