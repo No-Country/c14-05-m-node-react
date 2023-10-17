@@ -1,4 +1,4 @@
-const { user } = require("../db");
+const { user, Eventos } = require("../db");
 
 const userRegister = async (username, email, gener) => {
   const userFound = await user.findOne({ where: { email: email } });
