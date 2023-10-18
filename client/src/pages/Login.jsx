@@ -70,7 +70,7 @@ function Login({ currentUser }) {
         <div className="flex flex-col items-center font-nunito container mt-52">
           <form
             onSubmit={formik.handleSubmit}
-            className="w-[90%] flex flex-col"
+            className="w-[90%] flex flex-col relative"
           >
             <h1 className="text-left text-xl mb-4  ">Iniciar sesión</h1>
 
@@ -95,9 +95,19 @@ function Login({ currentUser }) {
               htmlFor="password"
               error={formik.touched.password && formik.errors.password}
             ></LabelAuth>
+            <span
+              className="absolute bottom-[196px] right-4 cursor-pointer "
+              onClick={tooglePassword}
+            >
+              <img
+                src={`${
+                  isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
+                }`}
+              />
+            </span>
 
             <InputAuth
-              type={`${isPasswordVisible ? "password" : "text"}`}
+              type={`${isPasswordVisible ? "text" : "password"}`}
               name="password"
               placeholder="Contraseña"
               onChange={formik.handleChange}

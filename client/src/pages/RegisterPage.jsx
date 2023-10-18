@@ -57,7 +57,6 @@ function RegisterPage() {
   const tooglePassword = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-  console.log(formik.touched.password);
 
   //Hay que mover a un archivo aparte pero en que carpeta?
   const inputFields = [
@@ -115,23 +114,23 @@ function RegisterPage() {
           </React.Fragment>
         ))}
 
+        <LabelAuth
+          htmlFor="password"
+          error={formik.touched.password && formik.errors.password}
+        ></LabelAuth>
         <span
           className="absolute bottom-[139px] right-4 cursor-pointer "
           onClick={tooglePassword}
         >
           <img
             src={`${
-              isPasswordVisible ? "/input/icon.svg" : "/input/icon_1.svg"
+              isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
             }`}
           />
         </span>
-        <LabelAuth
-          htmlFor="password"
-          error={formik.touched.password && formik.errors.password}
-        ></LabelAuth>
 
         <InputAuth
-          type={`${isPasswordVisible ? "password" : "text"}`}
+          type={`${isPasswordVisible ? "text" : "password"}`}
           name="password"
           placeholder="Contraseña"
           onChange={formik.handleChange}
