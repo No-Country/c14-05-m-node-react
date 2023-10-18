@@ -18,7 +18,6 @@ function LandingPage() {
               <Card />
               <Card />
               <Card />
-              <Card />
           </div>
         </div>
       </section>
