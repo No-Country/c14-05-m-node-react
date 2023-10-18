@@ -79,7 +79,7 @@ function Login({ currentUser }) {
               placeholder="Email"
               onChange={formik.handleChange}
               value={formik.values.email}
-              error={formik.touched.password && formik.errors.password}
+              error={formik.touched.email && formik.errors.email}
               onBlur={(e) => {
                 formik.handleBlur(e);
                 setError(false);
@@ -91,7 +91,6 @@ function Login({ currentUser }) {
               error={formik.touched.email && formik.errors.email}
             ></LabelAuth>
 
-            {tooglePassword}
             <div className="relative text-left ">
               <InputAuth
                 type={`${isPasswordVisible ? "text" : "password"}`}
@@ -99,6 +98,7 @@ function Login({ currentUser }) {
                 placeholder="Contraseña"
                 onChange={formik.handleChange}
                 value={formik.values.password}
+                error={formik.touched.password && formik.errors.password}
                 onBlur={(e) => {
                   formik.handleBlur(e);
                   setError(false);
@@ -106,12 +106,8 @@ function Login({ currentUser }) {
                 required
               />
 
-              <LabelAuth
-                htmlFor="password"
-                error={formik.touched.password && formik.errors.password}
-              ></LabelAuth>
               <span
-                className="absolute bottom-[35px] right-4 cursor-pointer "
+                className="absolute bottom-[13px] right-4 cursor-pointer "
                 onClick={tooglePassword}
               >
                 <img
@@ -121,6 +117,10 @@ function Login({ currentUser }) {
                 />
               </span>
             </div>
+            <LabelAuth
+              htmlFor="password"
+              error={formik.touched.password && formik.errors.password}
+            ></LabelAuth>
             <button
               className="btn-primary btn-md rounded-[15px] p-4 mb-16 mt-8 flex justify-center items-center"
               type="submit"

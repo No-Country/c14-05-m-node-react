@@ -122,12 +122,9 @@ function RegisterPage() {
             error={formik.touched.password && formik.errors.password}
             required
           />
-          <LabelAuth
-            htmlFor="password"
-            error={formik.touched.password && formik.errors.password}
-          ></LabelAuth>
+
           <span
-            className="absolute bottom-[35px] right-4 cursor-pointer "
+            className="absolute bottom-[13px] right-4 cursor-pointer "
             onClick={tooglePassword}
           >
             <img
@@ -137,6 +134,10 @@ function RegisterPage() {
             />
           </span>
         </div>
+        <LabelAuth
+          htmlFor="password"
+          error={formik.touched.password && formik.errors.password}
+        ></LabelAuth>
 
         <button
           className="btn-primary btn-md rounded-[15px] p-4 mb-8 h-12 mt-8 flex justify-center items-center"
