@@ -1,16 +1,31 @@
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useFormik } from "formik";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import { auth, googleProvider } from "../../firebase-config";
-import Logo from "../components/logo";
+import InputAuth from "../components/InputAuth";
+import LabelAuth from "../components/LabelAuth";
 import LoggedUserPage from "./LoggedUserPage";
 
 function Login({ currentUser }) {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isError, setError] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("El email es invalido")
+        .required("Email es requerido"),
+      password: Yup.string()
+        .max(25, "Contraseña tiene que ser 25 caracteres o menos")
+        .min(6, "Contraseña tiene que ser 6 caracteres o mas")
+        .required("Contraseña es requerida"),
+    }),
     onSubmit: ({ email, password }) => {
       signInWithEmail(email, password);
     },
@@ -24,6 +39,8 @@ function Login({ currentUser }) {
         console.log("ID Token:", userToken);
       }
     } catch (err) {
+      setError(true);
+      //
       console.log(err.message);
     }
   };
@@ -37,8 +54,12 @@ function Login({ currentUser }) {
         console.log("ID Token:", userToken);
       }
     } catch (error) {
+      setError(true);
       console.log("Error al logearse ");
     }
+  };
+  const tooglePassword = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
@@ -46,32 +67,56 @@ function Login({ currentUser }) {
       {currentUser ? (
         <LoggedUserPage currentUser={currentUser} />
       ) : (
-        <div className="flex flex-col items-center font-nunito container mt-60">
+        <div className="flex flex-col items-center font-nunito container mt-52">
           <form
             onSubmit={formik.handleSubmit}
             className="w-[90%] flex flex-col"
           >
             <h1 className="text-left text-xl mb-4  ">Iniciar sesión</h1>
 
-            <input
-              className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none border-dark focus:border-accent active:border-accent"
-              type="text"
+            <LabelAuth
+              htmlFor="email"
+              error={formik.touched.email && formik.errors.email}
+            ></LabelAuth>
+
+            <InputAuth
+              type="email"
               name="email"
-              placeholder="Usuario"
+              placeholder="Email"
               onChange={formik.handleChange}
               value={formik.values.email}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                setError(false);
+              }}
               required
             />
+            <LabelAuth
+              htmlFor="password"
+              error={formik.touched.password && formik.errors.password}
+            ></LabelAuth>
 
-            <input
-              className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none border-dark focus:border-accent active:border-accent"
-              type="password"
+            <InputAuth
+              type={`${isPasswordVisible ? "password" : "text"}`}
               name="password"
               placeholder="Contraseña"
               onChange={formik.handleChange}
               value={formik.values.password}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                setError(false);
+              }}
               required
             />
+
+            {isError ? (
+              <span className="text center text-error">
+                <h1>Email o Contraseña incorrecto</h1>
+              </span>
+            ) : (
+              ""
+            )}
+
             <button
               className="btn-primary btn-md rounded-[15px] p-4 mb-16 mt-8 flex justify-center items-center"
               type="submit"

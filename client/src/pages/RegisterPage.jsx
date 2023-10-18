@@ -1,11 +1,17 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useFormik } from "formik";
+import { useField, useFormik } from "formik";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import { auth } from "../../firebase-config";
-import Logo from "../components/logo";
+import InputAuth from "../components/InputAuth";
+import LabelAuth from "../components/LabelAuth";
 
 function RegisterPage() {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const navigate = useNavigate();
+
   const createNewUser = async (email, password) => {
     const { user } = await createUserWithEmailAndPassword(
       auth,
@@ -16,12 +22,30 @@ function RegisterPage() {
   };
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      apellido: "",
+      name: "",
+      lastName: "",
       email: "",
-      nombreUsuario: "",
+      userName: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .max(25, "Nombre tiene que ser 25 caracteres o menos")
+        .required("Nombre es requerido"),
+      lastName: Yup.string()
+        .max(25, "Apellido tiene que ser 25 caracteres o menos")
+        .required("Apellido es requerido"),
+      email: Yup.string()
+        .email("El email es invalido")
+        .required("Email es requerido"),
+      userName: Yup.string()
+        .max(15, "Nombre de usuario tiene que ser 15 caracteres o menos")
+        .required("Nombre de usuario  es requerido"),
+      password: Yup.string()
+        .max(25, "Contraseña tiene que ser 25 caracteres o menos")
+        .min(6, "Contraseña tiene que ser 6 caracteres o mas")
+        .required("Contraseña es requerida"),
+    }),
 
     onSubmit: ({ email, password }) => {
       createNewUser(email, password);
@@ -30,58 +54,89 @@ function RegisterPage() {
     },
   });
 
+  const tooglePassword = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+  console.log(formik.touched.password);
+
+  //Hay que mover a un archivo aparte pero en que carpeta?
+  const inputFields = [
+    {
+      label: "Nombre",
+      name: "name",
+      type: "text",
+      placeholder: "Nombre",
+    },
+    {
+      label: "Apellido",
+      name: "lastName",
+      type: "text",
+      placeholder: "Apellido",
+    },
+    {
+      label: "Email",
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+    },
+    {
+      label: "Nombre de usuario",
+      name: "userName",
+      type: "text",
+      placeholder: "Nombre de usuario",
+    },
+  ];
+
   return (
     <div className="container font-nunito">
       <form
         onSubmit={formik.handleSubmit}
-        className="w-[90%] flex flex-col gap-4"
+        className="w-[90%] flex flex-col relative"
       >
         <h1 className="text-left text-xl mb-4">Registrate</h1>
+        {inputFields.map((field) => (
+          <React.Fragment key={field.name}>
+            <LabelAuth
+              htmlFor={field.name}
+              error={formik.touched[field.name] && formik.errors[field.name]}
+            >
+              {field.label}
+            </LabelAuth>
+            <InputAuth
+              type={field.type}
+              name={field.name}
+              error={formik.touched[field.name] && formik.errors[field.name]}
+              placeholder={field.placeholder}
+              onChange={formik.handleChange}
+              value={formik.values[field.name]}
+              onBlur={formik.handleBlur}
+              required
+            />
+          </React.Fragment>
+        ))}
 
-        <input
-          className="border  p-[10px] rounded-[14px] h-12 outline-none border-dark focus:border-accent active:border-accent"
-          type="text"
-          name="nombre"
-          placeholder="Nombre"
-          onChange={formik.handleChange}
-          value={formik.values.nombre}
-          required
-        />
-        <input
-          className="h-12 border  p-[10px] rounded-[14px] outline-none border-dark focus:border-accent active:border-accent"
-          type="text"
-          name="apellido"
-          placeholder="Apellido"
-          onChange={formik.handleChange}
-          value={formik.values.apellido}
-          required
-        />
-        <input
-          className="h-12 border  p-[10px] rounded-[14px] outline-none border-dark focus:border-accent active:border-accent "
-          type="text"
-          name="email"
-          placeholder="Email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          required
-        />
-        <input
-          className="h-12 border  p-[10px] rounded-[14px] outline-none border-dark focus:border-accent active:border-accent"
-          type="text"
-          name="nombreUsuario"
-          placeholder="Nombre de usuario"
-          onChange={formik.handleChange}
-          value={formik.values.nombreUsuario}
-          required
-        />
+        <span
+          className="absolute bottom-[139px] right-4 cursor-pointer "
+          onClick={tooglePassword}
+        >
+          <img
+            src={`${
+              isPasswordVisible ? "/input/icon.svg" : "/input/icon_1.svg"
+            }`}
+          />
+        </span>
+        <LabelAuth
+          htmlFor="password"
+          error={formik.touched.password && formik.errors.password}
+        ></LabelAuth>
 
-        <input
-          className="h-12 border  p-[10px] rounded-[14px] outline-none border-dark focus:border-accent active:border-accent"
-          type="password"
+        <InputAuth
+          type={`${isPasswordVisible ? "password" : "text"}`}
           name="password"
           placeholder="Contraseña"
           onChange={formik.handleChange}
           value={formik.values.password}
+          onBlur={formik.handleBlur}
           required
         />
 
