@@ -73,12 +73,6 @@ function Login({ currentUser }) {
             className="w-[90%] flex flex-col relative"
           >
             <h1 className="text-left text-xl mb-4  ">Iniciar sesión</h1>
-
-            <LabelAuth
-              htmlFor="email"
-              error={formik.touched.email && formik.errors.email}
-            ></LabelAuth>
-
             <InputAuth
               type="email"
               name="email"
@@ -93,33 +87,40 @@ function Login({ currentUser }) {
               required
             />
             <LabelAuth
-              htmlFor="password"
-              error={formik.touched.password && formik.errors.password}
+              htmlFor="email"
+              error={formik.touched.email && formik.errors.email}
             ></LabelAuth>
-            <span
-              className="absolute bottom-[171px] right-4 cursor-pointer "
-              onClick={tooglePassword}
-            >
-              <img
-                src={`${
-                  isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
-                }`}
+
+            {tooglePassword}
+            <div className="relative text-left ">
+              <InputAuth
+                type={`${isPasswordVisible ? "text" : "password"}`}
+                name="password"
+                placeholder="Contraseña"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                onBlur={(e) => {
+                  formik.handleBlur(e);
+                  setError(false);
+                }}
+                required
               />
-            </span>
 
-            <InputAuth
-              type={`${isPasswordVisible ? "text" : "password"}`}
-              name="password"
-              placeholder="Contraseña"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              onBlur={(e) => {
-                formik.handleBlur(e);
-                setError(false);
-              }}
-              required
-            />
-
+              <LabelAuth
+                htmlFor="password"
+                error={formik.touched.password && formik.errors.password}
+              ></LabelAuth>
+              <span
+                className="absolute bottom-[35px] right-4 cursor-pointer "
+                onClick={tooglePassword}
+              >
+                <img
+                  src={`${
+                    isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
+                  }`}
+                />
+              </span>
+            </div>
             <button
               className="btn-primary btn-md rounded-[15px] p-4 mb-16 mt-8 flex justify-center items-center"
               type="submit"
