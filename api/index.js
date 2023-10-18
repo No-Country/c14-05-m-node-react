@@ -17,20 +17,14 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn, Country } = require('./src/db.js');
-const axios = require("axios")
-const cors = require("cors");
+const server = require("./src/app");
+const { conn } = require("./src/db.js");
+require("dotenv").config();
+const { PORT } = process.env;
 
-server.use(cors());
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, async () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-
-
-    
-
-
-
-    
+  server.listen(PORT, () => {
+    console.log(`listening at ${PORT}`); // eslint-disable-line no-console
+  });
+});
