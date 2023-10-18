@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 
-
 function UserLocation() {
   // Get coordinates
   const [location, setLocation] = useState(null);
@@ -42,10 +41,12 @@ function UserLocation() {
   }, [location]);
 
   return (
-    <div className="p-4">
-      icon ubicación
-      <div>{namePlace ? `${namePlace.address.state} ${namePlace.address.country}` : 'Permitenos acceder a tu ubicación'}</div>
-      icono notificación
+    <div className="m-4 flex justify-between">
+      <div className='flex'>
+        <img src="/IconLocation.svg" alt="Icono de ubicación" />
+        <div>{namePlace ? `${namePlace.address.state} ${namePlace.address.country}` : 'Permitenos acceder a tu ubicación'}</div>
+      </div>
+      <img src="/IconNotification.svg" alt="Icono de ubicación" />
     </div>
   );
 }

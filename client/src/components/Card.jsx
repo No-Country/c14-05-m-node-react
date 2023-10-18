@@ -1,6 +1,6 @@
 const Card = () => {
   return (
-    <div className="max-w-md rounded overflow-hidden shadow-lg">
+    <div className="max-w-md rounded overflow-hidden shadow-lg my-2 mx-2 w-80">
       <img
         src="/ImageCard.svg"
         alt="Event"
