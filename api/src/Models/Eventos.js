@@ -27,34 +27,6 @@ module.exports = (sequelize) => {
       costo: {
         type: DataTypes.DECIMAL(10, 2),
       },
-      // id_User: {
-      //   type: DataTypes.UUID,
-      //   allowNull: false,
-      //   references: {
-      //     model: "User",
-      //     key: "id",
-      //   },
-      // },
-      //   id_tipo_evento: {
-      //     type: DataTypes.INTEGER,
-      //     allowNull: false,
-      //     references: {
-      //       model: "tipos_evento",
-      //       key: "id",
-      //     },
-      //   },
-      //   id_ubicacion: {
-      //     type: DataTypes.INTEGER,
-      //     allowNull: false,
-      //     references: {
-      //       model: "ubicaciones",
-      //       key: "id",
-      //     },
-      //   },
-      //   tipo_evento: {
-      //     type: DataTypes.STRING,
-      //     allowNull: false,
-      //   },
       isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
