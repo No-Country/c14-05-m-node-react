@@ -87,20 +87,11 @@ function RegisterPage() {
   ];
 
   return (
-    <div className="container font-nunito">
-      <form
-        onSubmit={formik.handleSubmit}
-        className="w-[90%] flex flex-col relative"
-      >
+    <div className="container font-nunito ">
+      <form onSubmit={formik.handleSubmit} className="w-[90%] flex flex-col ">
         <h1 className="text-left text-xl mb-4">Registrate</h1>
         {inputFields.map((field) => (
           <React.Fragment key={field.name}>
-            <LabelAuth
-              htmlFor={field.name}
-              error={formik.touched[field.name] && formik.errors[field.name]}
-            >
-              {field.label}
-            </LabelAuth>
             <InputAuth
               type={field.type}
               name={field.name}
@@ -111,33 +102,41 @@ function RegisterPage() {
               onBlur={formik.handleBlur}
               required
             />
+            <LabelAuth
+              htmlFor={field.name}
+              error={formik.touched[field.name] && formik.errors[field.name]}
+            >
+              {field.label}
+            </LabelAuth>
           </React.Fragment>
         ))}
 
-        <LabelAuth
-          htmlFor="password"
-          error={formik.touched.password && formik.errors.password}
-        ></LabelAuth>
-        <span
-          className="absolute bottom-[139px] right-4 cursor-pointer "
-          onClick={tooglePassword}
-        >
-          <img
-            src={`${
-              isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
-            }`}
+        <div className="relative text-left">
+          <InputAuth
+            type={`${isPasswordVisible ? "text" : "password"}`}
+            name="password"
+            placeholder="Contraseña"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && formik.errors.password}
+            required
           />
-        </span>
-
-        <InputAuth
-          type={`${isPasswordVisible ? "text" : "password"}`}
-          name="password"
-          placeholder="Contraseña"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          onBlur={formik.handleBlur}
-          required
-        />
+          <LabelAuth
+            htmlFor="password"
+            error={formik.touched.password && formik.errors.password}
+          ></LabelAuth>
+          <span
+            className="absolute bottom-[35px] right-4 cursor-pointer "
+            onClick={tooglePassword}
+          >
+            <img
+              src={`${
+                isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
+              }`}
+            />
+          </span>
+        </div>
 
         <button
           className="btn-primary btn-md rounded-[15px] p-4 mb-8 h-12 mt-8 flex justify-center items-center"

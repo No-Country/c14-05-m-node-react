@@ -85,6 +85,7 @@ function Login({ currentUser }) {
               placeholder="Email"
               onChange={formik.handleChange}
               value={formik.values.email}
+              error={formik.touched.password && formik.errors.password}
               onBlur={(e) => {
                 formik.handleBlur(e);
                 setError(false);
@@ -96,7 +97,7 @@ function Login({ currentUser }) {
               error={formik.touched.password && formik.errors.password}
             ></LabelAuth>
             <span
-              className="absolute bottom-[196px] right-4 cursor-pointer "
+              className="absolute bottom-[171px] right-4 cursor-pointer "
               onClick={tooglePassword}
             >
               <img
@@ -119,14 +120,6 @@ function Login({ currentUser }) {
               required
             />
 
-            {isError ? (
-              <span className="text center text-error">
-                <h1>Email o Contraseña incorrecto</h1>
-              </span>
-            ) : (
-              ""
-            )}
-
             <button
               className="btn-primary btn-md rounded-[15px] p-4 mb-16 mt-8 flex justify-center items-center"
               type="submit"
@@ -135,14 +128,22 @@ function Login({ currentUser }) {
                 Iniciar sesión
               </h1>
             </button>
-            <h2 className="text-center text-dark font-normal text-base ">
-              ¿No tenés cuenta?
-              <Link to={"../signup"} className="font-bold ml-1">
-                Registrate
-              </Link>
-              .
-            </h2>
           </form>
+          {isError ? (
+            <span className="text center text-error">
+              <h1>Email o Contraseña incorrecto</h1>
+            </span>
+          ) : (
+            ""
+          )}
+
+          <h2 className="text-center text-dark font-normal text-base ">
+            ¿No tenés cuenta?
+            <Link to={"../signup"} className="font-bold ml-1">
+              Registrate
+            </Link>
+            .
+          </h2>
           <div className="mt-4 mb-8 h-[1px] bg-grayB w-72"></div>
           <button
             className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none w-[90%] border-dark flex justify-center items-center gap-4 active:opacity-90 active:bg-gray-200 hover:opacity-85"
