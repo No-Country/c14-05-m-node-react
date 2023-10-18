@@ -16,9 +16,12 @@
 }
 
 .cerrar-sesion {
+  display: flex;
   margin-top: 20px;
   background-color: #c9c9c9;
   border-radius: 15px;
+  justify-content: center;
+  align-items: center;
   height: 47px;
   transition: background-color 0.3s;
   cursor: pointer;
