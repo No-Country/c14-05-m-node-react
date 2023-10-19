@@ -6,8 +6,12 @@ const createEvents = async (
   fecha,
   hora,
   costo,
-  isActive
+  isActive,
+  userid
 ) => {
+  // const usuario = await user.findByPk(userid);
+  // if (usuario) {
+  //   console.log(usuario);
   const nuevoEvento = await Eventos.create({
     titulo,
     descripcion,
@@ -15,37 +19,34 @@ const createEvents = async (
     hora,
     costo,
     isActive,
+    userid,
   });
-  return newEvent;
+  return nuevoEvento;
+  // } else {
+  //   console.log("El usuario no fue encontrado");
+  // }
 };
 
-const obtenerEvento = async (req, res) => {
-  try {
-    const eventos = await Eventos.findAll();
-    res.status(200).json(eventos);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: "Hubo un error al obtener los eventos." });
-  }
-};
+// const obtenerEvento = async (req, res) => {
+//   try {
+//     const eventos = await Eventos.findAll();
+//     res.status(200).json(eventos);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ mensaje: "Hubo un error al obtener los eventos." });
+//   }
+// };
 
-const eliminarEvento = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const numFilasEliminadas = await Evento.destroy({ where: { id } });
-    if (numFilasEliminadas) {
-      res.status(200).json({ mensaje: "Evento eliminado correctamente." });
-    } else {
-      res.status(404).json({ mensaje: "Evento no encontrado." });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensaje: "Hubo un error al eliminar el evento." });
-  }
+const deleteEventById = async (id) => {
+  const eventToDestroy = await Eventos.findByPk(id);
+  if (!eventToDestroy) return null;
+  await eventToDestroy.destroy();
+  const remainingEvents = await Eventos.findAll();
+  return remainingEvents;
 };
 
 module.exports = {
   createEvents,
-  obtenerEvento,
-  eliminarEvento,
+  //obtenerEvento,
+  deleteEventById,
 };
