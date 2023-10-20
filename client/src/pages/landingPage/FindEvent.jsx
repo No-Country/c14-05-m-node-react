@@ -37,7 +37,7 @@ function FindEvent() {
         {
           type: 'Ver más',
           icon: '/eventType/IconAddEvent.svg',
-          rute: 'mas-eventos'
+          route: '../CategoriesPage'
         },
     ]
   return (
@@ -46,7 +46,7 @@ function FindEvent() {
         <div className='overflow-x-auto'>
           <ul className="flex my-2 space-x-2">
             { eventTypes.map((eType, index) => {
-                return <LinkIconVertical key={index} icon={eType.icon} type={eType.type}/>
+                return <LinkIconVertical key={index} icon={eType.icon} type={eType.type} route={eType.route} />
               })
             }
           </ul>

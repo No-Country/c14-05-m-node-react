@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import Login from "./pages/Login.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import LandingPage from './pages/landingPage/index.jsx'
+import CategoriesPage from "./pages/CategoriesPage.jsx";
 
 //estas son las rutas, para navegar a una ruta hay que usar el componente <Link>
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "CategoriesPage",
+    element: <CategoriesPage />,
   }
 ]);
 
