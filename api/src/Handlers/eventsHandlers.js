@@ -1,47 +1,29 @@
-const {
-  createEvent,
-  findEventById,
-  deleteEventById,
-} = require("../Controllers/eventsControlles");
+const { createEvents, deleteEventById } = require("../Controllers/eventsControllers");
 
-const crearEventoHandler = async (req, res) => {
+const createEventHandler = async (req, res) => {
   try {
-    const { titulo, descripcion, fecha } = req.body;
-    const nuevoEvento = await createEvent(titulo, descripcion, fecha);
-    if (!nuevoEvento)
-      return res
-        .status(409)
-        .json({ msg: `Evento con el título ${titulo} ya existe` });
-    res.status(201).json(nuevoEvento);
+    const { titulo, descripcion, fecha, hora, costo, isActive, userid } = req.body;
+    const newEvent = await createEvents(titulo, descripcion, fecha, hora, costo, isActive, userid);
+    if (!newEvent)
+      return res.status(409).json({ msg: `User with email ${email} already exists` });
+    res.status(201).json(newEvent);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-const obtenerEventoPorIdHandler = async (req, res) => {
+const deleteEventByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const evento = await findEventById(id);
-    if (!evento) return res.status(404).json({ msg: `Evento con ID ${id} no encontrado` });
-    res.status(200).json(evento);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-const eliminarEventoPorIdHandler = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const respuesta = await deleteEventById(id);
-    if (!respuesta) return res.status(404).json({ msg: `Evento con ID ${id} no encontrado` });
-    res.status(200).json(respuesta);
+    const response = await deleteEventById(id);
+    if (!response) return res.status(404).json({ msg: `User with id ${id} not found` });
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
 module.exports = {
-  crearEventoHandler,
-  obtenerEventoPorIdHandler,
-  eliminarEventoPorIdHandler,
+  createEventHandler,
+  deleteEventByIdHandler,
 };

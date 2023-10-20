@@ -1,14 +1,17 @@
 const { Router } = require("express");
 
 const {
-  crearEventoHandler,
-  obtenerEventoPorIdHandler,
-  eliminarEventoPorIdHandler,
-} = require('../Handlers/eventsHandlers');
+  createEventHandler,
+  deleteEventByIdHandler,
+} = require("../Handlers/eventsHandlers");
 const eventRouter = Router();
 
-eventRouter.post('/evento', crearEventoHandler);
-eventRouter.get('/evento/:id', obtenerEventoPorIdHandler);
-eventRouter.delete('/evento/:id', eliminarEventoPorIdHandler);
+eventRouter.get("/", (req, res) => {
+  res.send("Estoy en eventos");
+});
+
+eventRouter.post("/", createEventHandler);
+eventRouter.delete("/:id", deleteEventByIdHandler);
+
 
 module.exports = eventRouter;
