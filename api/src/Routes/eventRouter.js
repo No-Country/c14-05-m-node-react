@@ -4,7 +4,8 @@ const {
   createEventHandler,
   deleteEventByIdHandler,
   findEventByIdHandler,
-  //updateEventByIdHandler
+  updateEventByIdHandler,
+  findAllEventsHandler,
 } = require("../Handlers/eventsHandlers");
 const eventRouter = Router();
 
@@ -14,11 +15,7 @@ const eventRouter = Router();
 
 eventRouter.post("/", createEventHandler);
 eventRouter.delete("/:id", deleteEventByIdHandler);
-//eventRouter.put("/:id",  updateEventByIdHandler);
-
+eventRouter.put("/:id", updateEventByIdHandler);
 eventRouter.get("/:id", findEventByIdHandler);
-
-
-
-
+eventRouter.get("/", findAllEventsHandler);
 module.exports = eventRouter;

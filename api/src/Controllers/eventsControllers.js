@@ -9,7 +9,6 @@ const createEvents = async (
   isActive,
   userid
 ) => {
-  
   const nuevoEvento = await Eventos.create({
     titulo,
     descripcion,
@@ -20,7 +19,6 @@ const createEvents = async (
     userid,
   });
   return nuevoEvento;
-  
 };
 
 const deleteEventById = async (id) => {
@@ -31,33 +29,45 @@ const deleteEventById = async (id) => {
   return remainingEvents;
 };
 
-
 const findEventById = async (id) => {
   const event = await Eventos.findByPk(id);
+  if (!event) return resizeBy.send("evento no existe");
   return event;
 };
 
-// const updateEventById = async (id, titulo, descripcion, fecha, hora, costo, isActive, userid) => {
-//   const eventToUpdate = await Eventos.findByPk(id);
-//   if (!eventToUpdate) return null;
-//   const updatedEvent = await eventToUpdate.update({
-//     titulo,
-//     descripcion,
-//     fecha,
-//     hora,
-//     costo,
-//     isActive,
-//     userid,
-//   });
-//   return updatedEvent;
-// };
+const updateEventById = async (
+  id,
+  titulo,
+  descripcion,
+  fecha,
+  hora,
+  costo,
+  isActive,
+  userid
+) => {
+  const eventToUpdate = await Eventos.findByPk(id);
+  if (!eventToUpdate) return null;
+  const updatedEvent = await eventToUpdate.update({
+    titulo,
+    descripcion,
+    fecha,
+    hora,
+    costo,
+    isActive,
+    userid,
+  });
+  return updatedEvent;
+};
+
+const findAllEvents = async () => {
+  const allEvents = await Eventos.findAll({});
+  return allEvents;
+};
 
 module.exports = {
   createEvents,
   deleteEventById,
   findEventById,
- // updateEventById,
+  findAllEvents,
+  updateEventById,
 };
-
-
-
