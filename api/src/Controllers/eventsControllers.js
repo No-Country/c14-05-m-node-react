@@ -2,6 +2,8 @@ const { user, Eventos } = require("../db");
 
 const createEvents = async (
   titulo,
+  provincia,
+  ubicacion,
   descripcion,
   fecha,
   hora,
@@ -9,16 +11,24 @@ const createEvents = async (
   isActive,
   userid
 ) => {
-  const nuevoEvento = await Eventos.create({
-    titulo,
-    descripcion,
-    fecha,
-    hora,
-    costo,
-    isActive,
-    userid,
-  });
-  return nuevoEvento;
+  console.log(userid);
+  const us = await user.findByPk(userid);
+  if (us) {
+    const nuevoEvento = await Eventos.create({
+      titulo,
+      provincia,
+      ubicacion,
+      descripcion,
+      fecha,
+      hora,
+      costo,
+      isActive,
+    });
+    await nuevoEvento.setUser(us);
+    return nuevoEvento;
+  } else {
+    return null;
+  }
 };
 
 const deleteEventById = async (id) => {
@@ -36,8 +46,9 @@ const findEventById = async (id) => {
 };
 
 const updateEventById = async (
-  id,
   titulo,
+  provincia,
+  ubicacion,
   descripcion,
   fecha,
   hora,
@@ -49,6 +60,8 @@ const updateEventById = async (
   if (!eventToUpdate) return null;
   const updatedEvent = await eventToUpdate.update({
     titulo,
+    provincia,
+    ubicacion,
     descripcion,
     fecha,
     hora,

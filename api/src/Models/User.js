@@ -5,11 +5,16 @@ module.exports = (sequelize) => {
     "user",
     {
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        unique: true,
       },
-      username: {
+      nombre: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      apellido: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -17,6 +22,36 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+      },
+      provincia: {
+        type: DataTypes.ENUM,
+        values: [
+          "Buenos Aires",
+          "Córdoba",
+          "Santa Fe",
+          "Mendoza",
+          "Tucumán",
+          "Entre Ríos",
+          "Salta",
+          "Misiones",
+          "Chaco",
+          "Corrientes",
+          "Santiago del Estero",
+          "San Juan",
+          "Jujuy",
+          "Río Negro",
+          "Neuquén",
+          "Formosa",
+          "Chubut",
+          "San Luis",
+          "Catamarca",
+          "La Rioja",
+          "La Pampa",
+          "Santa Cruz",
+          "Tierra del Fuego",
+        ],
+        allowNull: false,
+        defaultValue: "Buenos Aires",
       },
       gener: {
         type: DataTypes.ENUM,
@@ -30,6 +65,6 @@ module.exports = (sequelize) => {
         defaultValue: true,
       },
     },
-    { timestamps: false }
+    { timestamps: true }
   );
 };

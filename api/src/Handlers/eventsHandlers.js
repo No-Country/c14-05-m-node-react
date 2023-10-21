@@ -9,10 +9,21 @@ const {
 //post()--------------------------
 const createEventHandler = async (req, res) => {
   try {
-    const { titulo, descripcion, fecha, hora, costo, isActive, userid } =
-      req.body;
+    const {
+      titulo,
+      provincia,
+      ubicacion,
+      descripcion,
+      fecha,
+      hora,
+      costo,
+      isActive,
+      userid,
+    } = req.body;
     const newEvent = await createEvents(
       titulo,
+      provincia,
+      ubicacion,
       descripcion,
       fecha,
       hora,
@@ -57,11 +68,21 @@ const findEventByIdHandler = async (req, res) => {
 const updateEventByIdHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const { titulo, descripcion, fecha, hora, costo, isActive, userid } =
-      req.body;
-    const updatedEvent = await updateEventById(
-      id,
+    const {
       titulo,
+      provincia,
+      ubicacion,
+      descripcion,
+      fecha,
+      hora,
+      costo,
+      isActive,
+      userid,
+    } = req.body;
+    const updatedEvent = await updateEventById(
+      titulo,
+      provincia,
+      ubicacion,
       descripcion,
       fecha,
       hora,
