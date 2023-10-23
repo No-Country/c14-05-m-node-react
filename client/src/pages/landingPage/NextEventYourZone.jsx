@@ -1,9 +1,10 @@
 import Card from "../../components/Card"
+import Title2 from "../../components/Title2"
 
 function NextEventYourZone() {
   return (
     <section className='m-4 '>
-        <h2 className='text-dark'>Próximos eventos en tu zona</h2>
+        <Title2 title={"Próximos eventos en tu zona"}/>
         <div className='overflow-x-auto'>
           <div className='flex space-x-2'>
               <Card />
