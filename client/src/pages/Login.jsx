@@ -1,14 +1,16 @@
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { auth, googleProvider } from "../../firebase-config";
 import InputAuth from "../components/InputAuth";
 import LabelAuth from "../components/LabelAuth";
+import { UserContext } from "../components/UserProvider";
 import LoggedUserPage from "./LoggedUserPage";
 
-function Login({ currentUser }) {
+function Login() {
+  const { currentUser } = useContext(UserContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
 
@@ -61,18 +63,19 @@ function Login({ currentUser }) {
   const tooglePassword = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
+  console.log(currentUser?.email);
 
   return (
     <>
-      {currentUser ? (
+      {currentUser?.email ? (
         <LoggedUserPage currentUser={currentUser} />
       ) : (
-        <div className="flex flex-col items-center font-nunito container mt-52">
+        <div className="container mt-52 flex flex-col items-center font-nunito">
           <form
             onSubmit={formik.handleSubmit}
-            className="w-[90%] flex flex-col relative"
+            className="relative flex w-[90%] flex-col"
           >
-            <h1 className="text-left text-xl mb-4  ">Iniciar sesión</h1>
+            <h1 className="mb-4 text-left text-xl  ">Iniciar sesión</h1>
             <InputAuth
               type="email"
               name="email"
@@ -122,7 +125,7 @@ function Login({ currentUser }) {
               error={formik.touched.password && formik.errors.password}
             ></LabelAuth>
             <button
-              className="btn-primary btn-md rounded-[15px] p-4 mb-16 mt-8 flex justify-center items-center"
+              className="btn-primary btn-md mb-16 mt-8 flex items-center justify-center rounded-[15px] p-4"
               type="submit"
             >
               <h1 className="text-center text-sm text-white ">
@@ -138,22 +141,22 @@ function Login({ currentUser }) {
             ""
           )}
 
-          <h2 className="text-center text-dark font-normal text-base ">
+          <h2 className="text-center text-base font-normal text-dark ">
             ¿No tenés cuenta?
-            <Link to={"../signup"} className="font-bold ml-1">
+            <Link to={"../signup"} className="ml-1 font-bold">
               Registrate
             </Link>
             .
           </h2>
-          <div className="mt-4 mb-8 h-[1px] bg-grayB w-72"></div>
+          <div className="mb-8 mt-4 h-[1px] w-72 bg-grayB"></div>
           <button
-            className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none w-[90%] border-dark flex justify-center items-center gap-4 active:opacity-90 active:bg-gray-200 hover:opacity-85"
+            className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90"
             onClick={signWithGoogle}
           >
             <img src="/IconoGoogle.svg" alt="google icon" />
             <p>Iniciar sesión con Google</p>
           </button>
-          <button className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none w-[90%] border-dark flex justify-center items-center gap-4 active:opacity-90 active:bg-gray-200 hover:opacity-85">
+          <button className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90">
             <img src="/iconoFacebook.svg" alt="facebook icon" />
 
             <p>Iniciar sesión con Facebook</p>
