@@ -61,11 +61,29 @@ module.exports = (sequelize) => {
       costo: {
         type: DataTypes.DECIMAL(10, 2),
       },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      etiquetas: {
+        type: DataTypes.ENUM,
+        values: [
+          "Teatro",
+          "Música",
+          "Comida",
+          "Moda",
+          "Centros Culturales",
+          "Otros",
+        ],
+        allowNull: false,
+        defaultValue: "Otros",
+      },
+
       isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
     },
-    { timestamps: false }
+    { timestamps: true }
   );
 };

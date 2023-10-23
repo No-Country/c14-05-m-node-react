@@ -8,6 +8,8 @@ const createEvents = async (
   fecha,
   hora,
   costo,
+  image,
+  etiquetas,
   isActive,
   userid
 ) => {
@@ -22,6 +24,8 @@ const createEvents = async (
       fecha,
       hora,
       costo,
+      image,
+      etiquetas,
       isActive,
     });
     await nuevoEvento.setUser(us);
@@ -53,6 +57,8 @@ const updateEventById = async (
   fecha,
   hora,
   costo,
+  image,
+  etiquetas,
   isActive,
   userid
 ) => {
@@ -66,6 +72,8 @@ const updateEventById = async (
     fecha,
     hora,
     costo,
+    image,
+    etiquetas,
     isActive,
     userid,
   });
