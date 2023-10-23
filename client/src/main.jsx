@@ -9,6 +9,7 @@ import Login from "./pages/Login.jsx";
 import Onboarding from "./pages/Onboarding/Onboarding.jsx";
 import Preferencias from "./pages/Onboarding/Preferencias.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
+import CategoriesPage from "./pages/CategoriesPage.jsx";
 
 //estas son las rutas, para navegar a una ruta hay que usar el componente <Link>
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
     path: "preferencias",
     element: <Preferencias />,
   },
+  {
+    path: "CategoriesPage",
+    element: <CategoriesPage />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
