@@ -38,7 +38,7 @@ function FindEvent() {
         {
           type: 'Ver más',
           icon: '/eventType/IconAddEvent.svg',
-          route: '../CategoriesPage'
+          route: '../categorias'
         },
     ]
   return (
