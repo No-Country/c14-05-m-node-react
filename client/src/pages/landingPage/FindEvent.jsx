@@ -1,4 +1,5 @@
 import LinkIconVertical from "../../components/LinkIconVertical"
+import Title2 from "../../components/Title2"
 
 function FindEvent() {
     const eventTypes = [
@@ -42,7 +43,7 @@ function FindEvent() {
     ]
   return (
     <section className='m-4'>
-        <h2 className='text-dark'>Encontrá tu evento favorito</h2>
+        <Title2 title={"¡Encontrá tu evento favorito!"}/>
         <div className='overflow-x-auto'>
           <ul className="flex my-2 space-x-2">
             { eventTypes.map((eType, index) => {

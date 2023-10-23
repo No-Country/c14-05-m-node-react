@@ -38,7 +38,7 @@ function Navbar() {
               return <li className="w-[60px]" key={index}>
                           <Link to={link.rute} className="flex flex-col items-center">
                               <img src={link.icon} alt="Icon home" className=""/>
-                              <span className="text-white">{link.linkName}</span>
+                              <span className="text-white font-nunito">{link.linkName}</span>
                           </Link>
                       </li>
             })
