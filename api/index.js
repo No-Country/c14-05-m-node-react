@@ -19,15 +19,17 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn, Country } = require('./src/db.js');
-const axios = require("axios")
+const axios = require("axios");
 const cors = require("cors");
 
 server.use(cors());
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, async () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
 
+// Syncing all the models at once.
+conn.sync({ alter: true }).then(() => {
+  server.listen(3001, async () => {
+    console.log('Server is running on http://localhost:3001');
+  });
+});
 
     
 
