@@ -17,22 +17,18 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn, Country } = require('./src/db.js');
-const axios = require("axios");
-const cors = require("cors");
+const server = require("./src/app");
+const { conn } = require("./src/db.js");
+require("dotenv").config();
+const { PORT } = process.env;
 
 server.use(cors());
-
 // Syncing all the models at once.
-conn.sync({ alter: true }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
-    console.log('Server is running on http://localhost:3001');
-  });
-});
-
-    
-
+    console.log('%s listening at 3001'); // eslint-disable-line no-console
+   })    
+  })
 
 
     

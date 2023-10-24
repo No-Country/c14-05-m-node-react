@@ -6,12 +6,13 @@ import "./index.css";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Login from "./pages/Login.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
+import LandingPage from './pages/landingPage/index.jsx'
 
 //estas son las rutas, para navegar a una ruta hay que usar el componente <Link>
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <LandingPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

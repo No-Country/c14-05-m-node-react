@@ -1,17 +1,31 @@
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useFormik } from "formik";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import { auth, googleProvider } from "../../firebase-config";
-import Logo from "../components/logo";
+import InputAuth from "../components/InputAuth";
+import LabelAuth from "../components/LabelAuth";
 import LoggedUserPage from "./LoggedUserPage";
-import "./login.css";
 
 function Login({ currentUser }) {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isError, setError] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("El email es invalido")
+        .required("Email es requerido"),
+      password: Yup.string()
+        .max(25, "Contraseña tiene que ser 25 caracteres o menos")
+        .min(6, "Contraseña tiene que ser 6 caracteres o mas")
+        .required("Contraseña es requerida"),
+    }),
     onSubmit: ({ email, password }) => {
       signInWithEmail(email, password);
     },
@@ -25,6 +39,8 @@ function Login({ currentUser }) {
         console.log("ID Token:", userToken);
       }
     } catch (err) {
+      setError(true);
+      //
       console.log(err.message);
     }
   };
@@ -38,8 +54,12 @@ function Login({ currentUser }) {
         console.log("ID Token:", userToken);
       }
     } catch (error) {
+      setError(true);
       console.log("Error al logearse ");
     }
+  };
+  const tooglePassword = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
@@ -47,46 +67,97 @@ function Login({ currentUser }) {
       {currentUser ? (
         <LoggedUserPage currentUser={currentUser} />
       ) : (
-        <div className="form-container">
-          <Logo />
-          <form onSubmit={formik.handleSubmit} className="formulario">
-            <h1 className="form-title">Iniciar sesión</h1>
-
-            <input
-              className="input-email"
-              type="text"
+        <div className="flex flex-col items-center font-nunito container mt-52">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="w-[90%] flex flex-col relative"
+          >
+            <h1 className="text-left text-xl mb-4  ">Iniciar sesión</h1>
+            <InputAuth
+              type="email"
               name="email"
-              placeholder="Usuario"
+              placeholder="Email"
               onChange={formik.handleChange}
               value={formik.values.email}
+              error={formik.touched.email && formik.errors.email}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                setError(false);
+              }}
               required
             />
+            <LabelAuth
+              htmlFor="email"
+              error={formik.touched.email && formik.errors.email}
+            ></LabelAuth>
 
-            <input
-              className="input-password"
-              type="password"
-              name="password"
-              placeholder="Contraseña"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              required
-            />
-            <button className="btn-submit" type="submit">
-              <h1 className="btn-submit-text">Iniciar sesión</h1>
+            <div className="relative text-left ">
+              <InputAuth
+                type={`${isPasswordVisible ? "text" : "password"}`}
+                name="password"
+                placeholder="Contraseña"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                error={formik.touched.password && formik.errors.password}
+                onBlur={(e) => {
+                  formik.handleBlur(e);
+                  setError(false);
+                }}
+                required
+              />
+
+              <span
+                className="absolute bottom-[13px] right-4 cursor-pointer "
+                onClick={tooglePassword}
+              >
+                <img
+                  src={`${
+                    isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
+                  }`}
+                />
+              </span>
+            </div>
+            <LabelAuth
+              htmlFor="password"
+              error={formik.touched.password && formik.errors.password}
+            ></LabelAuth>
+            <button
+              className="btn-primary btn-md rounded-[15px] p-4 mb-16 mt-8 flex justify-center items-center"
+              type="submit"
+            >
+              <h1 className="text-center text-sm text-white ">
+                Iniciar sesión
+              </h1>
             </button>
-            <h2 className="form-subtitle">
-              ¿No tenés cuenta?
-              <Link to={"../signup"} className="registrate-link">
-                Registrate
-              </Link>
-              .
-            </h2>
           </form>
-          <div className="separador"></div>
-          <button className="btn-google" onClick={signWithGoogle}>
-            Iniciar sesión con Google
+          {isError ? (
+            <span className="text center text-error">
+              <h1>Email o Contraseña incorrecto</h1>
+            </span>
+          ) : (
+            ""
+          )}
+
+          <h2 className="text-center text-dark font-normal text-base ">
+            ¿No tenés cuenta?
+            <Link to={"../signup"} className="font-bold ml-1">
+              Registrate
+            </Link>
+            .
+          </h2>
+          <div className="mt-4 mb-8 h-[1px] bg-grayB w-72"></div>
+          <button
+            className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none w-[90%] border-dark flex justify-center items-center gap-4 active:opacity-90 active:bg-gray-200 hover:opacity-85"
+            onClick={signWithGoogle}
+          >
+            <img src="/IconoGoogle.svg" alt="google icon" />
+            <p>Iniciar sesión con Google</p>
           </button>
-          <button className="btn-facebook">Iniciar sesión con Facebook</button>
+          <button className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none w-[90%] border-dark flex justify-center items-center gap-4 active:opacity-90 active:bg-gray-200 hover:opacity-85">
+            <img src="/iconoFacebook.svg" alt="facebook icon" />
+
+            <p>Iniciar sesión con Facebook</p>
+          </button>
         </div>
       )}
     </>
