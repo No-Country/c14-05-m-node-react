@@ -6,43 +6,45 @@ function Navbar() {
     {
       icon: "/iconNavbar/IconHome.svg",
       linkName: "Inicio",
-      rute:"/"
+      rute: "/",
     },
     {
       icon: "/iconNavbar/IconEvent.svg",
       linkName: "Eventos",
-      rute:"/"
+      rute: "/",
     },
     {
       icon: "/iconNavbar/IconAddEvent.svg",
       linkName: "Publicar",
-      rute:"/"
+      rute: "/CrearEventos",
     },
     {
       icon: "/iconNavbar/IconTicket.svg",
       linkName: "Boletos",
-      rute:"/"
+      rute: "/",
     },
     {
       icon: "/iconNavbar/IconProfile.svg",
       linkName: "Perfil",
-      rute:"/"
+      rute: "/",
     },
-  ]
+  ];
   return (
     <div className="fixed bottom-0">
-      <nav className="p-2 bg-primary w-screen flex justify-center">
+      <nav className="flex w-screen justify-center bg-primary p-2">
         <ul className="flex space-x-2">
-          {
-            links.map((link,index)=>{
-              return <li className="w-[60px]" key={index}>
-                          <Link to={link.rute} className="flex flex-col items-center">
-                              <img src={link.icon} alt="Icon home" className=""/>
-                              <span className="text-white font-nunito">{link.linkName}</span>
-                          </Link>
-                      </li>
-            })
-          }
+          {links.map((link, index) => {
+            return (
+              <li className="w-[60px]" key={index}>
+                <Link to={link.rute} className="flex flex-col items-center">
+                  <img src={link.icon} alt="Icon home" className="" />
+                  <span className="font-nunito text-white">
+                    {link.linkName}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>

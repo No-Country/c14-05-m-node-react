@@ -9,7 +9,7 @@ function ConfimacionEvento() {
 
   async function handleSubmit() {
     //tienen que dejar pasar una string mas larga los de back
-    const id = currentUser.uid.substring(0, 10);
+    const id = currentUser?.uid.substring(0, 10);
     const data = { ...state, userid: id };
     const apiUrl = "http://localhost:3001/Eventos";
     //hacemos un post con el state al server
@@ -25,7 +25,7 @@ function ConfimacionEvento() {
 
   return (
     <>
-      <div className="flex h-14 w-[360px]  items-center justify-start gap-1 ">
+      <div className="flex h-14 w-[360px]  items-center justify-start gap-1 font-nunito">
         <Link to={"../creareventos"}>
           <img src="/crear-eventos/close-icon.svg" alt="close" />
         </Link>
@@ -94,13 +94,23 @@ function ConfimacionEvento() {
           <p>{state.descripcion}</p>
         </div>
         <div className="tags-del-evento flex flex-nowrap gap-2  text-sm font-normal not-italic leading-6 tracking-[0.25px] text-secondary">
+          {/*         {state?.etiquetas //para cuando se arregle lo de solo poder mandar 1 etiqueta
+            ? Array.from(state.etiquetas).map((value, index) => (
+                <>
+                  <span
+                    className="flex w-fit items-center gap-2 rounded-[15px] bg-primary px-3 py-1"
+                    key={index}
+                  >
+                    {value}
+                  </span>
+                </>
+              ))
+            : ""} */}
           <span className="flex w-fit items-center gap-2 rounded-[15px] bg-primary px-3 py-1">
             Musica
           </span>
-          <span className="flex w-fit items-center gap-2 rounded-[15px] bg-primary  px-3 py-1">
-            Fiesta
-          </span>
         </div>
+
         <button
           className="btn-primary btn-md  mb-16  mt-72  flex w-[328px]  items-center justify-center rounded-[15px] p-4 "
           onClick={handleSubmit}

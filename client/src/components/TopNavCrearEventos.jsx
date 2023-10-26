@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function TopNavCrearEventos() {
+function TopNavCrearEventos({ url }) {
   return (
     <>
       <div className="flex h-14 w-[360px]  items-center justify-start gap-1 ">
-        <Link to={"../creareventos"}>
+        <Link to={url}>
           <img src="/crear-eventos/back-arrow.svg" alt="go-back" />
         </Link>
 
