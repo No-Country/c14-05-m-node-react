@@ -11,7 +11,7 @@ import LabelAuth from "../components/LabelAuth";
 function RegisterPage() {
   //Despues hay que implementar react query por ahora esto anda
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isError, setError] = useState(true);
+  const [isError, setError] = useState(false);
   const apiUrl = "http://localhost:3001/user";
 
   const navigate = useNavigate();
@@ -32,8 +32,9 @@ function RegisterPage() {
   const formatGoogleUserData = (user) => {
     const fullName = user.displayName;
     const [nombre, apellido] = fullName.split(" ");
+    const id = user.uid.substring(0, 10);
     return {
-      id: user.uid,
+      id: id,
       nombre: nombre,
       apellido: apellido,
       email: user.email,
@@ -46,12 +47,11 @@ function RegisterPage() {
     try {
       response = await axios.post(apiUrl, data);
       if (response.status === 201) {
-        console.log("Logueado");
-        console.log(data);
-        navigate("/");
+        console.log("Usuario Creado");
+        navigate("/onboarding");
       }
     } catch (error) {
-      if (response.status === 409) {
+      if (error.response?.status === 409) {
         console.log("El usuario ya existe logueando...");
         navigate("/");
       } else {

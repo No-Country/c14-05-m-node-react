@@ -8,12 +8,12 @@ function ConfimacionEvento() {
   const { currentUser } = useContext(UserContext);
 
   async function handleSubmit() {
-    console.log(state);
-    console.log(currentUser);
-    const data = { ...state, userid: "12345" };
+    //tienen que dejar pasar una string mas larga los de back
+    const id = currentUser.uid.substring(0, 10);
+    const data = { ...state, userid: id };
     const apiUrl = "http://localhost:3001/Eventos";
     //hacemos un post con el state al server
-
+    console.log(id);
     try {
       const response = await axios.post(apiUrl, data);
       console.log(response);

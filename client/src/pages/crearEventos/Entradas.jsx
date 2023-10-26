@@ -33,6 +33,10 @@ function Entradas() {
 
     navigate("/crearEventos/confirmar", { state: newState });
   }
+  function handleCheck(e) {
+    setIsFree(e.target.cheked);
+    formik.values.precioEntradas = 0;
+  }
 
   return (
     <>
@@ -40,25 +44,38 @@ function Entradas() {
 
       <div className="mt-9 flex flex-col items-center justify-center gap-4">
         <div className="">
-          <label htmlFor="nombreEntradas">Nombre de la entrada</label>
+          <label
+            className=" h-4 shrink-0 text-sm font-semibold not-italic leading-4 tracking-[0.25px] text-dark"
+            htmlFor="nombreEntradas"
+          >
+            Nombre de la entrada
+          </label>
           <InputAuth
             type="text"
             name="nombreEntradas"
             error={
               formik.touched.nombreEntradas && formik.errors.nombreEntradas
             }
-            placeholder="Nombre del evento"
+            placeholder="Ingresá un nombre"
             onChange={formik.handleChange}
             value={formik.values.nombreEntradas}
             onBlur={formik.handleBlur}
             required
           />
-          <label htmlFor="name">
+          <label
+            htmlFor="name"
+            className="pl-4 text-xs font-medium not-italic leading-4 tracking-[0.2px] text-dark"
+          >
             Ingresá un nombre corto y fácil de recordar
           </label>
         </div>
         <div>
-          <label htmlFor="precioEntradas">Precio de la entrada</label>
+          <label
+            htmlFor="precioEntradas"
+            className="shrink-0 text-sm font-semibold not-italic leading-4 tracking-[0.25px] text-black"
+          >
+            Precio de la entrada
+          </label>
           <InputAuth
             type="text"
             name="precioEntradas"
@@ -70,14 +87,26 @@ function Entradas() {
             value={formik.values.precioEntradas}
             onBlur={formik.handleBlur}
             required
+            disabled={IsFree}
           />
 
-          <label>
-            <input type="checkbox" /> Evento gratuito
+          <label
+            htmlFor="checkbox"
+            className=" text-base font-normal not-italic leading-4 tracking-[0.1px] text-black"
+          >
+            <input
+              type="checkbox"
+              name="checkbox"
+              onChange={(e) => handleCheck(e)}
+            />
+            Evento Gratuito
           </label>
         </div>
         <div>
-          <label htmlFor="cantidadEntradas">
+          <label
+            htmlFor="cantidadEntradas"
+            className="shrink-0 text-sm font-semibold not-italic leading-4 tracking-[0.25px] text-black"
+          >
             Cantidad de entradas a la venta
           </label>
           <InputAuth

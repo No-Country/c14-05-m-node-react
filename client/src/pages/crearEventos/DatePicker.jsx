@@ -51,7 +51,7 @@ function DatePicker() {
       </div>
 
       <button
-        className="btn-primary btn-md mx-6 mb-16  mt-72  flex w-[328px] items-center justify-center rounded-[15px] p-4"
+        className="btn-primary btn-md mx-6 mb-16  mt-72  flex w-[328px] items-center justify-center rounded-[15px] p-4 disabled:bg-grayC disabled:text-grayB"
         onClick={handleSubmit}
       >
         <h1 className="text-center text-sm text-white ">Continuar</h1>
