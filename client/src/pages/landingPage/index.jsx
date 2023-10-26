@@ -9,20 +9,21 @@ import axios from 'axios';
 
 function LandingPage() {
   const [data, setData] = useState([]);
-
+  const apiUrl = "http://localhost:3001/Eventos";
   useEffect(() => {
-    // Make a GET request to your server running at http://localhost:3001
-    axios.get('https://localhost:3001/Eventos')
-      .then((response) => {
-        // Handle the data from the server's response
-        setData(response.data);
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the request
-        console.error('Error:', error);
-      });
-  },[]);
-  console.log('data de eventos',data)
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+        if (response.data) {
+          setData(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData(); // Call the async function to make the request
+  }, []);
   return (
     <>
       <header>
@@ -30,9 +31,9 @@ function LandingPage() {
       </header>
       <main className='my-[76px]'>
         <FindEvent />
-        <NextEventYourZone />
-        <FavoriteOrganizers />
-        <FavoriteEvents />
+        <NextEventYourZone data={data} />
+        <FavoriteOrganizers data={data}/>
+        <FavoriteEvents data={data}/>
       </main>
       <Navbar />
     </>
