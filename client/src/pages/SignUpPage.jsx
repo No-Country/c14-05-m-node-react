@@ -1,25 +1,84 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useField, useFormik } from "formik";
+import axios from "axios";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useFormik } from "formik";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { auth } from "../../firebase-config";
+import { auth, googleProvider } from "../../firebase-config";
 import InputAuth from "../components/InputAuth";
 import LabelAuth from "../components/LabelAuth";
 
 function RegisterPage() {
+  //Despues hay que implementar react query por ahora esto anda
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isError, setError] = useState(true);
+  const apiUrl = "http://localhost:3001/user";
 
   const navigate = useNavigate();
 
-  const createNewUser = async (email, password) => {
-    const { user } = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    console.log(user);
+  const signWithGoogle = async () => {
+    try {
+      const { user } = await signInWithPopup(auth, googleProvider);
+      if (user) {
+        const data = formatGoogleUserData(user);
+
+        sentNewUserToBackEndGoogle(data);
+      }
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
   };
+  const formatGoogleUserData = (user) => {
+    const fullName = user.displayName;
+    const [nombre, apellido] = fullName.split(" ");
+    return {
+      id: user.uid,
+      nombre: nombre,
+      apellido: apellido,
+      email: user.email,
+      isActive: true,
+    };
+  };
+
+  const sentNewUserToBackEndGoogle = async (data) => {
+    let response;
+    try {
+      response = await axios.post(apiUrl, data);
+      if (response.status === 201) {
+        console.log("Logueado");
+        console.log(data);
+        navigate("/");
+      }
+    } catch (error) {
+      if (response.status === 409) {
+        console.log("El usuario ya existe logueando...");
+        navigate("/");
+      } else {
+        setError(true);
+      }
+    }
+  };
+
+  const sentNewUserToBackEnd = async (user) => {
+    try {
+      const data = {
+        id: user.uid,
+        nombre: formik.values.name,
+        apellido: formik.values.lastName,
+        email: formik.values.email,
+        isActive: true,
+      };
+      const response = await axios.post(apiUrl, data);
+      if (response.status === 201) {
+        navigate("/");
+      }
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -46,19 +105,31 @@ function RegisterPage() {
         .min(6, "Contraseña tiene que ser 6 caracteres o mas")
         .required("Contraseña es requerida"),
     }),
-
     onSubmit: ({ email, password }) => {
       createNewUser(email, password);
-      formik.resetForm();
-      navigate("/login");
     },
   });
+
+  const createNewUser = async (email, password) => {
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      if (user) {
+        sentNewUserToBackEnd(user);
+      }
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
+  };
 
   const tooglePassword = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  //Hay que mover a un archivo aparte pero en que carpeta?
   const inputFields = [
     {
       label: "Nombre",
@@ -86,10 +157,14 @@ function RegisterPage() {
     },
   ];
 
+  function handleBlur() {
+    setError(false);
+  }
+
   return (
     <div className="container font-nunito ">
-      <form onSubmit={formik.handleSubmit} className="w-[90%] flex flex-col ">
-        <h1 className="text-left text-xl mb-4">Registrate</h1>
+      <form onSubmit={formik.handleSubmit} className=" flex w-full flex-col ">
+        <h1 className="mb-4 text-left text-xl">Registrate</h1>
         {inputFields.map((field) => (
           <React.Fragment key={field.name}>
             <InputAuth
@@ -99,7 +174,7 @@ function RegisterPage() {
               placeholder={field.placeholder}
               onChange={formik.handleChange}
               value={formik.values[field.name]}
-              onBlur={formik.handleBlur}
+              onBlur={handleBlur}
               required
             />
             <LabelAuth
@@ -140,18 +215,29 @@ function RegisterPage() {
         ></LabelAuth>
 
         <button
-          className="btn-primary btn-md rounded-[15px] p-4 mb-8 h-12 mt-8 flex justify-center items-center"
+          className="btn-primary btn-md mb-8 mt-8 flex h-12 items-center justify-center rounded-[15px] p-4"
           type="submit"
         >
           <h1 className="text-center text-sm text-white">Registrarse</h1>
         </button>
       </form>
-      <div className=" mb-8 h-[1px] bg-grayB w-72"></div>
-      <button className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none w-[90%] border-dark flex justify-center items-center gap-4 active:opacity-90 active:bg-gray-200 hover:opacity-85">
+      {isError ? (
+        <span className="text center mb-4 text-error">
+          <h1>Error al crear el usuario </h1>
+        </span>
+      ) : (
+        ""
+      )}
+
+      <div className=" mb-8 h-[1px] w-72 bg-grayB"></div>
+      <button
+        onClick={signWithGoogle}
+        className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90"
+      >
         <img src="/IconoGoogle.svg" alt="google icon" />
         <p>Iniciar sesión con Google</p>
       </button>
-      <button className="h-12 border  p-[10px] rounded-[14px] mb-5 outline-none w-[90%] border-dark flex justify-center items-center gap-4 active:opacity-90 active:bg-gray-200 hover:opacity-85">
+      <button className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90">
         <img src="/iconoFacebook.svg" alt="facebook icon" />
 
         <p>Iniciar sesión con Facebook</p>

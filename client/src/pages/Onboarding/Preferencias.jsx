@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { categoriasList } from "../../utils/Categorias";
 
 function Preferencias({}) {
   const [selectedCategories, setSelectedCategories] = useState(new Set());
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    changeBgColor("#CBDEF4");
+    return () => {
+      changeBgColor("#FFFF");
+    };
+  }, []);
+
+  const changeBgColor = (color) => {
+    document.body.style.backgroundColor = color;
+  };
 
   function handleCategoryClick(categoryName) {
     if (selectedCategories.has(categoryName)) {
@@ -15,11 +29,12 @@ function Preferencias({}) {
 
   function handleClickBtnCategories() {
     console.log(selectedCategories);
+    navigate("/");
     //aca iria un post al servidor con las preferencias seleccionadas
   }
 
   return (
-    <div className="h-screen w-screen bg-secondary p-4 pt-14 font-nunito text-gray-900">
+    <div className=" bg-secondary pt-14 font-nunito text-gray-900">
       <h1 className="text-left text-xl font-semibold not-italic leading-8 tracking-[0.15px] text-black">
         Seleccioná tus preferencias
       </h1>
