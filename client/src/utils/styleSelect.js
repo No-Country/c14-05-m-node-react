@@ -1,0 +1,21 @@
+export const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minWidth: "100%",
+    minHeight: "3rem",
+    padding: "8px",
+    alignItems: "center",
+    gap: "var(--spacing-s, 0.5rem)",
+    borderRadius: "0.9375rem",
+    background: "var(--greyscale-white, #FFF)",
+    border: "1px solid var(--grayscale-dark, #242424)",
+    width: "328px",
+    paddingRight: "10px",
+    borderRadius: "14px",
+    height: "12px",
+    outline: "none",
+  }),
+};
