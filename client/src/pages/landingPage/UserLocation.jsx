@@ -41,13 +41,16 @@ function UserLocation() {
   }, [location]);
 
   return (
-    <div className="m-4 flex justify-between">
-      <div className='flex'>
-        <img src="/IconLocation.svg" alt="Icono de ubicación" />
-        <div>{namePlace ? `${namePlace.address.state} ${namePlace.address.country}` : 'Permitenos acceder a tu ubicación'}</div>
+    <div className='fixed top-0  bg-white p-4 w-screen'>
+      <div className=" flex justify-between">
+        <div className='flex'>
+          <img src="/IconLocation.svg" alt="Icono de ubicación" />
+          <div>{namePlace ? `${namePlace.address.state} ${namePlace.address.country}` : 'Permitenos acceder a tu ubicación'}</div>
+        </div>
+        <img src="/IconNotification.svg" alt="Icono de ubicación" />
       </div>
-      <img src="/IconNotification.svg" alt="Icono de ubicación" />
     </div>
+
   );
 }
 

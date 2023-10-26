@@ -1,32 +1,40 @@
-import Card from '../../components/Card'
-import LinkIconVertical from '../../components/LinkIconVertical'
+import { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
+import FavoriteEvents from './FavoriteEvents'
+import FavoriteOrganizers from './FavoriteOrganizers'
+import FindEvent from './FindEvent'
+import NextEventYourZone from './NextEventYourZone'
 import UserLocation from "./UserLocation"
+import axios from 'axios';
 
 function LandingPage() {
+  const [data, setData] = useState([]);
+  const apiUrl = "http://localhost:3001/Eventos";
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+        if (response.data) {
+          setData(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData(); // Call the async function to make the request
+  }, []);
   return (
     <>
-      <UserLocation />
-      <section className='m-4'>
-        <h2 className='text-dark'>Encontrá tu evento favorito</h2>
-        <LinkIconVertical />
-      </section>
-      <section className='m-4 '>
-        <h2 className='text-dark'>Próximos eventos en tu zona</h2>
-        <div className='overflow-x-scroll'>
-          <div className='flex  w-[1000px]'>
-              <Card />
-              <Card />
-              <Card />
-          </div>
-        </div>
-      </section>
-      <section className='m-4'>
-        <h2 className='text-dark'>Organizadores que seguis</h2>
-      </section>
-      <section className='m-4'>
-        <h2 className='text-dark'>Eventos segun tu preferencia</h2>
-      </section>
+      <header>
+        <UserLocation />
+      </header>
+      <main className='my-[76px]'>
+        <FindEvent />
+        <NextEventYourZone data={data} />
+        <FavoriteOrganizers data={data}/>
+        <FavoriteEvents data={data}/>
+      </main>
       <Navbar />
     </>
 

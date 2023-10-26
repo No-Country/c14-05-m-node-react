@@ -6,8 +6,15 @@ const {
 
 const userRegisterHandler = async (req, res) => {
   try {
-    const { username, email, gener } = req.body;
-    const newUser = await userRegister(username, email, gener);
+    const { id, nombre, apellido, provincia, email, gener } = req.body;
+    const newUser = await userRegister(
+      id,
+      nombre,
+      apellido,
+      provincia,
+      email,
+      gener
+    );
     if (!newUser)
       return res
         .status(409)
@@ -40,6 +47,7 @@ const updateUserByIdHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 module.exports = {
   userRegisterHandler,
   deleteUserByIdHandler,
