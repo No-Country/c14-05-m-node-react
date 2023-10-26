@@ -22,13 +22,9 @@ const { conn } = require("./src/db.js");
 require("dotenv").config();
 const { PORT } = process.env;
 
-server.use(cors());
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, async () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-   })    
-  })
-
-
-    
+  server.listen(PORT, () => {
+    console.log(`listening at ${PORT}`); // eslint-disable-line no-console
+  });
+});
