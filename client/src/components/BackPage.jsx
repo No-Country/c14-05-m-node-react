@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom'
-import IconBack from '../../public/IconBack.svg?react'
+import { useNavigate } from 'react-router-dom';
+
 function BackPage({WhereBack}) {
+  const navigate = useNavigate();
   return (
     <>
         <div className='flex space-x-2'>
-            <Link to={"/"}>
-              <IconBack />
-            </Link>
+            <img src='/IconBack.svg' onClick={() => navigate(-1)}/>
             <div>{WhereBack}</div>
         </div>
     </>

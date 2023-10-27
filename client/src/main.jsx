@@ -11,6 +11,7 @@ import Preferencias from "./pages/Onboarding/Preferencias.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import FindEvent from "./pages/findEvent/index.jsx";
+import ReserveTicket from "./pages/findEvent/ReserveTicket.jsx";
 
 //estas son las rutas, para navegar a una ruta hay que usar el componente <Link>
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: "encontrar-evento",
     element: <FindEvent />,
+  },
+  {
+    path: "reservar-evento",
+    element: <ReserveTicket />,
   }
 ]);
 
