@@ -7,6 +7,10 @@ import "./index.css";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Login from "./pages/Login.jsx";
+import Onboarding from "./pages/Onboarding/Onboarding.jsx";
+import Preferencias from "./pages/Onboarding/Preferencias.jsx";
+import FindEvent from "./pages/findEvent/index.jsx";
+import ReserveTicket from "./pages/findEvent/ReserveTicket.jsx";
 import RegisterPage from "./pages/SignUpPage.jsx";
 import ConfimacionEvento from "./pages/crearEventos/ConfimacionEvento.jsx";
 import DatePicker from "./pages/crearEventos/DatePicker.jsx";
@@ -14,8 +18,7 @@ import Entradas from "./pages/crearEventos/Entradas.jsx";
 import Form from "./pages/crearEventos/Form.jsx";
 import TextAreaDescripcion from "./pages/crearEventos/TextAreaDescripcion.jsx";
 import CrearEventos from "./pages/crearEventos/index.jsx";
-import Onboarding from "./pages/onboarding/Onboarding.jsx";
-import Preferencias from "./pages/onboarding/Preferencias.jsx";
+
 //estas son las rutas, para navegar a una ruta hay que usar el componente <Link>
 const router = createBrowserRouter([
   {
@@ -40,11 +43,18 @@ const router = createBrowserRouter([
     element: <Preferencias />,
   },
   {
-    path: "CategoriesPage",
+    path: "categorias",
     element: <CategoriesPage />,
   },
   {
-    path: "CrearEventos",
+    path: "encontrar-evento",
+    element: <FindEvent />,
+  },
+  {
+    path: "reservar-evento",
+    element: <ReserveTicket />,
+  },
+  {  path: "CrearEventos",
     element: <CrearEventos />,
   },
   {
@@ -61,6 +71,7 @@ const router = createBrowserRouter([
   },
   { path: "CrearEventos/confirmar", element: <ConfimacionEvento /> },
   { path: "CrearEventos/textarea", element: <TextAreaDescripcion /> },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

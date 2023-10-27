@@ -17,6 +17,7 @@ function DatePicker() {
   const { state } = useLocation();
 
   function handleSubmit() {
+    console.log(state);
     const newState = { ...state, hora: startTime, fecha: startDate };
 
     console.log(newState);
@@ -24,7 +25,7 @@ function DatePicker() {
   }
   return (
     <div className="flex flex-col items-center justify-center">
-      <TopNavCrearEventos />
+      <TopNavCrearEventos url={"/crearEventos/Form"} />
 
       <h2 className="mt-10 h-8 w-full shrink-0 text-left text-base font-semibold not-italic leading-6 tracking-[0.1px] text-dark">
         Ingresá la fecha y hora de tu evento

@@ -20,6 +20,9 @@ function Form() {
     if (state?.eventDescription?.length > 1) {
       setTextArea(state.eventDescription);
     }
+    if (state?.etiquetas) {
+      setSelectedOptionsList(state.etiquetas);
+    }
     if (state?.name || state?.Description || state?.Location) {
       console.log("test");
       formik.setFieldTouched("eventName", true);
@@ -77,6 +80,7 @@ function Form() {
       name: formik.values.eventName,
       Description: formik.values.eventDescription,
       Location: formik.values.eventLocation,
+      etiquetas: selectedOptionsList,
     };
 
     navigate("/CrearEventos/textarea ", { state: state });
@@ -93,7 +97,7 @@ function Form() {
   };
   return (
     <>
-      <TopNavCrearEventos numberCheck={0} />
+      <TopNavCrearEventos url="../creareventos" />
       <div className="mb-4 mt-10 flex h-24 w-full flex-col items-center justify-center border-grayD">
         <img src="/crear-eventos/cameraicon.svg" alt="add-img" />
         <h2 className="text-sm font-semibold not-italic leading-4 tracking-[0.25px] text-[color:var(--grayscale-gray-a,#5B5B5B)]">
