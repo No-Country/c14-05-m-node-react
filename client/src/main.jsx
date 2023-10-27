@@ -10,6 +10,7 @@ import Onboarding from "./pages/Onboarding/Onboarding.jsx";
 import Preferencias from "./pages/Onboarding/Preferencias.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
+import FindEvent from "./pages/findEvent/index.jsx";
 
 //estas son las rutas, para navegar a una ruta hay que usar el componente <Link>
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "categorias",
     element: <CategoriesPage />,
+  },
+  {
+    path: "encontrar-evento",
+    element: <FindEvent />,
   }
 ]);
 
