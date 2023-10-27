@@ -38,7 +38,6 @@ function Login() {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
         const userToken = await user.getIdToken();
-        console.log("ID Token:", userToken);
       }
     } catch (err) {
       setError(true);
@@ -46,14 +45,13 @@ function Login() {
       console.log(err.message);
     }
   };
+
   const signWithGoogle = async () => {
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
       console.log(user);
       if (user) {
         //Esto seria el token que tenemos que mandar al back
-        const userToken = await user.getIdToken();
-        console.log("ID Token:", userToken);
       }
     } catch (error) {
       setError(true);
@@ -73,7 +71,7 @@ function Login() {
         <div className="container mt-52 flex flex-col items-center font-nunito">
           <form
             onSubmit={formik.handleSubmit}
-            className="relative flex w-[90%] flex-col"
+            className="relative flex  w-full flex-col"
           >
             <h1 className="mb-4 text-left text-xl  ">Iniciar sesión</h1>
             <InputAuth

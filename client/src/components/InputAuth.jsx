@@ -1,5 +1,5 @@
 const InputAuth = ({ name, error, ...rest }) => {
-  const inputStyles = `border border-dark p-[10px] pl-4  pr-10 rounded-[14px] h-12 outline-none focus:border-accent active:border-accent w-full ${
+  const inputStyles = `border border-dark pl-4 min-w-full pr-10 rounded-[15px] h-12 outline-none focus:border-accent active:border-accent text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark  ${
     error ? "border-error bg-[#FFE8E8]" : "border-dark"
   }`;
   return <input type="text" name={name} className={inputStyles} {...rest} />;
