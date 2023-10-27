@@ -1,8 +1,8 @@
 const { createInscripcion } = require("../Controllers/inscripcionControllers");
 
-const createInscripcionHandler = async (userId, eventoId, estaInscripto) => {
+const createInscripcionHandler = async (userid, eventoid, estaInscripto) => {
   try {
-    const inscripcion = await createInscripcion(userId, eventoId, estaInscripto);
+    const inscripcion = await createInscripcion(userid, eventoid, estaInscripto);
     return inscripcion;
   } catch (error) {
     throw new Error(error);

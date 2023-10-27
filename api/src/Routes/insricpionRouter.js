@@ -4,6 +4,6 @@ const router = express.Router();
 const { createInscripcionHandler } = require('../Handlers/inscripcionHandlers');
 
 // POST /inscripcion - ruta para crear una nueva inscripción
-router.post('/inscripcion', createInscripcionHandler);
+router.post('/Inscripcion', createInscripcionHandler);
 
 module.exports = router;
