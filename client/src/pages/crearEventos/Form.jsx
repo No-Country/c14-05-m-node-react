@@ -15,10 +15,11 @@ function Form() {
   const [selectedOptionsList, setSelectedOptionsList] = useState(new Set());
   const [textArea, setTextArea] = useState("");
 
+  console.log(textArea);
   const { state } = useLocation();
   useEffect(() => {
-    if (state?.eventDescription?.length > 1) {
-      setTextArea(state.eventDescription);
+    if (state?.Description?.length > 1) {
+      setTextArea(state.Description);
     }
     if (state?.etiquetas) {
       setSelectedOptionsList(state.etiquetas);
@@ -59,7 +60,7 @@ function Form() {
       titulo: formik.values.eventName,
       provincia: "Mendoza",
       ubicacion: formik.values.eventLocation,
-      descripcion: formik.values.eventDescription,
+      descripcion: textArea,
       fecha: "",
       hora: "",
       costo: "",
@@ -75,16 +76,14 @@ function Form() {
   };
 
   function handleClickTextInput() {
-    console.log(formik.values.eventDescription);
     const state = {
       name: formik.values.eventName,
-      Description: formik.values.eventDescription,
+      Description: textArea,
       Location: formik.values.eventLocation,
       etiquetas: selectedOptionsList,
     };
 
     navigate("/CrearEventos/textarea ", { state: state });
-    console.log("object");
   }
 
   const handleChange = (selectedOption) => {
