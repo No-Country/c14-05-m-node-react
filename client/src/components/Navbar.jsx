@@ -11,7 +11,7 @@ function Navbar() {
     {
       icon: "/iconNavbar/IconEvent.svg",
       linkName: "Eventos",
-      rute: "/",
+      rute: "/eventos",
     },
     {
       icon: "/iconNavbar/IconAddEvent.svg",

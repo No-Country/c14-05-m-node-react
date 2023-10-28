@@ -9,8 +9,8 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import Login from "./pages/Login.jsx";
 import Onboarding from "./pages/Onboarding/Onboarding.jsx";
 import Preferencias from "./pages/Onboarding/Preferencias.jsx";
-import FindEvent from "./pages/findEvent/index.jsx";
-import ReserveTicket from "./pages/findEvent/ReserveTicket.jsx";
+import SocialEvent from "./pages/socialEvent/index.jsx";
+import ReserveTicket from "./pages/socialEvent/ReserveTicket.jsx";
 import RegisterPage from "./pages/SignUpPage.jsx";
 import ConfimacionEvento from "./pages/crearEventos/ConfimacionEvento.jsx";
 import DatePicker from "./pages/crearEventos/DatePicker.jsx";
@@ -47,8 +47,8 @@ const router = createBrowserRouter([
     element: <CategoriesPage />,
   },
   {
-    path: "encontrar-evento",
-    element: <FindEvent />,
+    path: "eventos",
+    element: <SocialEvent />,
   },
   {
     path: "reservar-evento",
