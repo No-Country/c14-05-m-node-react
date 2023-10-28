@@ -1,6 +1,6 @@
-function CardHorizontal({img, title, date, hour, place, price}) {
+function CardHorizontal({img, title, date, hour, place, price, onClick}) {
   return (
-    <div className="flex w-[20.5rem] h-[6.5625rem] px-[0.5rem] py-[0.4375rem] space-x-4 rounded-3xl shadow ">
+    <div className="flex w-[20.5rem] h-[6.5625rem] px-[0.5rem] py-[0.4375rem] space-x-4 rounded-3xl shadow " onClick={onClick}>
         <img src={img} alt="Imagen del evento" className="w-[5.8125rem] h-[5.8125rem] object-cover rounded-3xl"/>
         <div className="w-[12.1875rem]">
             <h3 className="text-primary font-semibold">{title}</h3>
