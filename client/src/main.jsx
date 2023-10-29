@@ -18,6 +18,9 @@ import Entradas from "./pages/crearEventos/Entradas.jsx";
 import Form from "./pages/crearEventos/Form.jsx";
 import TextAreaDescripcion from "./pages/crearEventos/TextAreaDescripcion.jsx";
 import CrearEventos from "./pages/crearEventos/index.jsx";
+import DetailTicket from "./pages/socialEvent/DetailTicket.jsx";
+import PurchaseSommary from "./pages/socialEvent/PurchaseSommary.jsx";
+import ReservationFinalized from "./pages/socialEvent/ReservationFinalized.jsx";
 
 //estas son las rutas, para navegar a una ruta hay que usar el componente <Link>
 const router = createBrowserRouter([
@@ -53,6 +56,18 @@ const router = createBrowserRouter([
   {
     path: "reservar-evento",
     element: <ReserveTicket />,
+  },
+  {
+    path: "detalle-reserva",
+    element: <DetailTicket />,
+  },
+  {
+    path: "resumen-compra",
+    element: <PurchaseSommary />,
+  },
+  {
+    path: "reserva-finalizada",
+    element: <ReservationFinalized />,
   },
   {  path: "CrearEventos",
     element: <CrearEventos />,
