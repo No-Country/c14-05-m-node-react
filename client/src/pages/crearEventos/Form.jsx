@@ -96,94 +96,109 @@ function Form() {
   return (
     <>
       <TopNavCrearEventos url="../creareventos" />
-      <div className="mb-4 mt-10 flex h-24 w-full flex-col items-center justify-center border-grayD">
-        <img src="/crear-eventos/cameraicon.svg" alt="add-img" />
-        <h2 className="text-sm font-semibold not-italic leading-4 tracking-[0.25px] text-[color:var(--grayscale-gray-a,#5B5B5B)]">
-          Agregar imagen
-        </h2>
-      </div>
-      <form className="flex flex-col items-center gap-1">
-        <div className="flex min-w-[328px] flex-col ">
-          <InputAuth
-            type="text"
-            name="eventName"
-            error={formik.touched.eventName && formik.errors.eventName}
-            placeholder="Nombre del evento"
-            onChange={formik.handleChange}
-            value={formik.values.eventName}
-            onBlur={formik.handleBlur}
-            required
-          />
-          <LabelAuth
-            htmlFor="eventName"
-            error={formik.touched.eventName && formik.errors.eventName}
-          ></LabelAuth>
+      <div className="w-full ">
+        <div class="mb-4 mt-10 w-full items-center justify-center">
+          <label
+            for="dropzone-file"
+            class="  flex h-24 w-full cursor-pointer flex-col items-center justify-center rounded-lg  bg-grayD hover:bg-gray-100 "
+          >
+            <div class="flex flex-col items-center justify-center pb-6 pt-5">
+              <img src="/crear-eventos/cameraicon.svg" alt="upload" />
+              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <span class="font-semibold">Agregar imagen</span>
+              </p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" />
+          </label>
         </div>
 
-        <div className="flex min-w-[328px] flex-col">
-          <InputAuth
-            type="text"
-            name="eventLocation"
-            error={formik.touched.eventLocation && formik.errors.eventLocation}
-            placeholder="Ingresá la ubicación"
-            onChange={formik.handleChange}
-            value={formik.values.eventLocation}
-            onBlur={formik.handleBlur}
-            required
-          />
-          <LabelAuth
-            htmlFor="eventLocation"
-            error={formik.touched.eventLocation && formik.errors.eventLocation}
-          ></LabelAuth>
-        </div>
-
-        <div
-          className="flex min-w-[328px] flex-col"
-          onClick={handleClickTextInput}
-        >
-          <input
-            className="h-12 min-w-[328px] cursor-pointer rounded-[15px] border border-dark pl-4 pr-10 text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none "
-            placeholder="Descripción del evento"
-            value={textArea}
-            readOnly
-          />
-        </div>
-
-        <div className="mt-4  flex w-[328px] min-w-[328px] flex-col text-dark">
-          <Select
-            options={optionList}
-            styles={customStyles}
-            placeholder="Etiquetas"
-            value={CurrentSelectedOption}
-            onChange={handleChange}
-            readOnly
-            formatOptionLabel={({ label, icon }) => (
-              <div className="flex w-[328px] flex-row items-center gap-4    text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none focus:border-accent active:border-accent ">
-                {icon} {label}
-              </div>
-            )}
-          />
-          <div className="mt-4 flex flex-wrap gap-2">
-            {Array.from(selectedOptionsList).map((value, index) => (
-              <div
-                className="flex items-start justify-start gap-2 rounded-[15px] bg-primary px-3 py-1 text-white"
-                key={index}
-              >
-                <p className=" text-sm font-normal not-italic leading-6 tracking-[0.25px]">
-                  {value}
-                </p>
-              </div>
-            ))}
+        <form className="flex flex-col items-center gap-1">
+          <div className="flex w-full flex-col ">
+            <InputAuth
+              type="text"
+              name="eventName"
+              error={formik.touched.eventName && formik.errors.eventName}
+              placeholder="Nombre del evento"
+              onChange={formik.handleChange}
+              value={formik.values.eventName}
+              onBlur={formik.handleBlur}
+              required
+            />
+            <LabelAuth
+              htmlFor="eventName"
+              error={formik.touched.eventName && formik.errors.eventName}
+            ></LabelAuth>
           </div>
-        </div>
-        <button
-          className="btn-primary btn-md  mb-16  mt-72  flex w-[328px] items-center justify-center rounded-[15px] p-4 disabled:bg-grayC disabled:text-grayB"
-          onClick={handleSubmit}
-          disabled={!formik.isValid}
-        >
-          <h1 className="text-center text-sm ">Continuar</h1>
-        </button>
-      </form>
+
+          <div className="flex w-full flex-col">
+            <InputAuth
+              type="text"
+              name="eventLocation"
+              error={
+                formik.touched.eventLocation && formik.errors.eventLocation
+              }
+              placeholder="Ingresá la ubicación"
+              onChange={formik.handleChange}
+              value={formik.values.eventLocation}
+              onBlur={formik.handleBlur}
+              required
+            />
+            <LabelAuth
+              htmlFor="eventLocation"
+              error={
+                formik.touched.eventLocation && formik.errors.eventLocation
+              }
+            ></LabelAuth>
+          </div>
+
+          <div
+            className="flex min-w-full flex-col"
+            onClick={handleClickTextInput}
+          >
+            <input
+              className="h-12 w-full cursor-pointer rounded-[15px] border border-dark pl-4 pr-10 text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none "
+              placeholder="Descripción del evento"
+              value={textArea}
+              readOnly
+            />
+          </div>
+
+          <div className="mt-4  flex w-full flex-col text-dark">
+            <Select
+              options={optionList}
+              styles={customStyles}
+              placeholder="Etiquetas"
+              value={CurrentSelectedOption}
+              onChange={handleChange}
+              readOnly
+              formatOptionLabel={({ label, icon }) => (
+                <div className="flex w-full flex-row items-center gap-4    text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none focus:border-accent active:border-accent ">
+                  {icon} {label}
+                </div>
+              )}
+            />
+            <div className="mt-4 flex flex-wrap gap-2">
+              {Array.from(selectedOptionsList).map((value, index) => (
+                <div
+                  className="flex items-start justify-start gap-2 rounded-[15px] bg-primary px-3 py-1 text-white"
+                  key={index}
+                >
+                  <p className=" text-sm font-normal not-italic leading-6 tracking-[0.25px]">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <button
+            className="btn-primary btn-md  mb-16  mt-72  flex w-[328px] items-center justify-center rounded-[15px] p-4 disabled:bg-grayC disabled:text-grayB"
+            onClick={handleSubmit}
+            disabled={!formik.isValid}
+          >
+            <h1 className="text-center text-sm ">Continuar</h1>
+          </button>
+        </form>
+      </div>
     </>
   );
 }
