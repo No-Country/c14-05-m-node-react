@@ -71,7 +71,6 @@ function Form() {
       userid: "",
     };
     //vamos a enviar usando useNavigate
-    console.log("dfsfdsfs");
     navigate("/crearEventos/date", { state: evento });
   };
 

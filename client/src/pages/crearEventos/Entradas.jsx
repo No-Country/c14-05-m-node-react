@@ -40,7 +40,7 @@ function Entradas() {
 
   return (
     <>
-      <TopNavCrearEventos url={"/crearEventos/date"} />
+      <TopNavCrearEventos url={"/crearEventos/date"} completed={2} />
 
       <div className="mt-9 flex flex-col items-center justify-center gap-4">
         <div className="">
