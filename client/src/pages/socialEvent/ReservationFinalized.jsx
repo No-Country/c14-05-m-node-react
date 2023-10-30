@@ -22,7 +22,7 @@ function ReservationFinalized() {
           type="button"
           onClick={() => navigate("/resumen-compra")}
         >
-          Ver reservar
+          Ver reserva
         </button>
         <button
           className="text-primary border border-primary w-full rounded-[15px] p-4"
