@@ -7,7 +7,7 @@ import Info from "../../components/Info";
 function PurchaseSommary() {
   const { state } = useLocation();
   let navigate = useNavigate();
-  console.log(state);
+console.log(state)
   return (
     <div className="my-4">
       <BackPage />
@@ -49,7 +49,7 @@ function PurchaseSommary() {
       <button
         className="btn-primary w-full rounded-[15px] p-4"
         type="button"
-        onClick={() => navigate("/reserva-finalizada")}
+        onClick={() => navigate("/reserva-finalizada",{state:state})}
       >
         Reservar
       </button>
