@@ -29,6 +29,34 @@ const createInscripcion = async (estaInscripto, isActive, userid, eventoid) => {
   }
 };
 
+const findInscripcionById = async (inscripcionId) => {
+  const inscripcion = await Inscripcion.findByPk(inscripcionId);
+  return inscripcion;
+};
+
+const updateInscripcion = async (inscripcionId, estaInscripto, isActive) => {
+  const inscripcion = await Inscripcion.findByPk(inscripcionId);
+  if (inscripcion) {
+    inscripcion.estaInscripto = estaInscripto;
+    inscripcion.isActive = isActive;
+    await inscripcion.save();
+    return inscripcion;
+  } else {
+    return null;
+  }
+};
+
+const deleteInscripcion = async (inscripcionId) => {
+  const deletedInscripcion = await Inscripcion.destroy({
+    where: { id: inscripcionId },
+  });
+  return deletedInscripcion;
+};
+
 module.exports = {
   createInscripcion,
+  findInscripcionById,
+  updateInscripcion,
+  deleteInscripcion,
 };
+

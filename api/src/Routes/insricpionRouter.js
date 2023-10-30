@@ -1,9 +1,16 @@
 // inscripcionRoutes.js
 const express = require('express');
 const router = express.Router();
-const { createInscripcionHandler } = require('../Handlers/inscripcionHandlers');
+const { 
+  createInscripcionHandler,
+  findInscripcionHandler,
+  updateInscripcionHandler,
+  deleteInscripcionHandler,
+} = require('../Handlers/inscripcionHandlers');
 
-// POST /inscripcion - ruta para crear una nueva inscripción
 router.post('/', createInscripcionHandler);
+router.get('/:inscripcionId', findInscripcionHandler);
+router.put('/:inscripcionId', updateInscripcionHandler);
+router.delete('/:inscripcionId', deleteInscripcionHandler);
 
 module.exports = router;
