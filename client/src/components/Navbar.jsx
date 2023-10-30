@@ -31,7 +31,7 @@ function Navbar() {
   ]
   return (
     <div className="fixed bottom-0">
-      <nav className="p-2 bg-primary w-screen flex justify-center">
+      <nav className="p-2 bg-primary w-screen flex justify-center h-[56px] items-center">
         <ul className="flex space-x-2">
           {
             links.map((link,index)=>{

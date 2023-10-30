@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useState } from "react";
 
 function UserLocation() {
@@ -35,22 +35,25 @@ function UserLocation() {
           setNamePlace(data);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
     }
   }, [location]);
 
   return (
-    <div className='fixed top-0  bg-white p-4 w-screen'>
+    <div className="fixed top-0  bg-white p-4 w-screen">
       <div className=" flex justify-between">
-        <div className='flex'>
+        <div className="flex">
           <img src="/IconLocation.svg" alt="Icono de ubicación" />
-          <div>{namePlace ? `${namePlace.address.state} ${namePlace.address.country}` : 'Permitenos acceder a tu ubicación'}</div>
+          <div>
+            {namePlace
+              ? `${namePlace.address.state} ${namePlace.address.country}`
+              : "Permitenos acceder a tu ubicación"}
+          </div>
         </div>
         <img src="/IconNotification.svg" alt="Icono de ubicación" />
       </div>
     </div>
-
   );
 }
 

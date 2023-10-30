@@ -29,7 +29,7 @@ function LandingPage() {
       <header>
         <UserLocation />
       </header>
-      <main className='my-[76px]'>
+      <main className='my-[56px]'>
         <FindEvent />
         <NextEventYourZone data={data} />
         <FavoriteOrganizers data={data}/>
