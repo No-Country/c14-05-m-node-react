@@ -115,7 +115,7 @@ function Form() {
           )}
         </div>
 
-        <form className="flex flex-col items-center gap-1">
+        <form className="flex flex-col items-center  gap-1">
           <div className="flex w-full flex-col ">
             <InputAuth
               type="text"

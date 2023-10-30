@@ -9,11 +9,11 @@ function ConfimacionEvento() {
 
   async function handleSubmit() {
     //tienen que dejar pasar una string mas larga los de back
-    const id = currentUser?.uid.substring(0, 10);
+    const id = currentUser?.uid;
     const data = { ...state, userid: id };
     const apiUrl = "http://localhost:3001/Eventos";
     //hacemos un post con el state al server
-    console.log(id);
+    console.log(currentUser);
     try {
       const response = await axios.post(apiUrl, data);
       console.log(response);
@@ -84,7 +84,7 @@ function ConfimacionEvento() {
             <img src="/crear-eventos/icono-precio.svg" alt="icono-precio" />
           </span>
           <p className="text-sm font-normal not-italic leading-4 tracking-[0.25px] text-dark">
-            {`$ ${state.costo} Entrada general`}
+            {`$ ${state.costo} `}
           </p>
         </div>
         <div>
@@ -110,13 +110,14 @@ function ConfimacionEvento() {
             Musica
           </span>
         </div>
-
-        <button
-          className="btn-primary btn-md  mb-16  mt-72  flex w-[328px]  items-center justify-center rounded-[15px] p-4 "
-          onClick={handleSubmit}
-        >
-          <h1 className="text-center text-sm text-white ">Continuar</h1>
-        </button>
+        <div className="mb-16 mt-8 flex w-full items-center  justify-center">
+          <button
+            className="btn-primary btn-md    flex w-[328px]  items-center justify-center rounded-[15px] p-4 "
+            onClick={handleSubmit}
+          >
+            <h1 className="text-center text-sm text-white ">Continuar</h1>
+          </button>
+        </div>
       </div>
     </>
   );

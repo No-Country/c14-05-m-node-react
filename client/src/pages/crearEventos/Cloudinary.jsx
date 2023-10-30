@@ -26,19 +26,19 @@ function Cludinary({ setUrl_Imagen, Url_Imagen }) {
   return (
     <>
       <label
-        for="dropzone-file"
-        class="  bg-grayc flex h-24 w-full cursor-pointer flex-col items-center justify-center  rounded-lg hover:bg-gray-100 "
+        htmlFor="dropzone-file"
+        className="  bg-grayc flex h-24 w-full cursor-pointer flex-col items-center justify-center  rounded-lg hover:bg-gray-100 "
       >
-        <div class="flex flex-col items-center justify-center pb-6 pt-5">
+        <div className="flex flex-col items-center justify-center pb-6 pt-5">
           <img src="/crear-eventos/cameraicon.svg" alt="upload" />
-          <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-            <span class="font-semibold">Agregar imagen</span>
+          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+            <span className="font-semibold text-grayA">Agregar imagen</span>
           </p>
         </div>
         <input
           id="dropzone-file"
           type="file"
-          class="hidden"
+          className="hidden"
           onChange={ChangeUploadImage}
         />
       </label>
