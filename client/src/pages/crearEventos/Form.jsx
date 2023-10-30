@@ -8,18 +8,23 @@ import LabelAuth from "../../components/LabelAuth";
 import TopNavCrearEventos from "../../components/TopNavCrearEventos";
 import { optionList } from "../../utils/Categorias";
 import { customStyles } from "../../utils/styleSelect";
+import Cludinary from "./Cloudinary";
 
 function Form() {
   const navigate = useNavigate();
   const [CurrentSelectedOption, SetCurrentSelectedOption] = useState(null);
   const [selectedOptionsList, setSelectedOptionsList] = useState(new Set());
   const [textArea, setTextArea] = useState("");
+  const [Url_Imagen, setUrl_Imagen] = useState("");
 
   console.log(textArea);
   const { state } = useLocation();
   useEffect(() => {
     if (state?.Description?.length > 1) {
       setTextArea(state.Description);
+    }
+    if (state?.image?.length > 1) {
+      setUrl_Imagen(state.image);
     }
     if (state?.etiquetas) {
       setSelectedOptionsList(state.etiquetas);
@@ -80,6 +85,7 @@ function Form() {
       Description: textArea,
       Location: formik.values.eventLocation,
       etiquetas: selectedOptionsList,
+      image: Url_Imagen,
     };
 
     navigate("/CrearEventos/textarea ", { state: state });
@@ -97,22 +103,19 @@ function Form() {
     <>
       <TopNavCrearEventos url="../creareventos" />
       <div className="w-full ">
-        <div class="mb-4 mt-10 w-full items-center justify-center">
-          <label
-            for="dropzone-file"
-            class="  flex h-24 w-full cursor-pointer flex-col items-center justify-center rounded-lg  bg-grayD hover:bg-gray-100 "
-          >
-            <div class="flex flex-col items-center justify-center pb-6 pt-5">
-              <img src="/crear-eventos/cameraicon.svg" alt="upload" />
-              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <span class="font-semibold">Agregar imagen</span>
-              </p>
-            </div>
-            <input id="dropzone-file" type="file" class="hidden" />
-          </label>
+        <div class="mb-4 mt-12 w-full items-center justify-center">
+          {Url_Imagen ? (
+            <img
+              src={Url_Imagen}
+              alt="img"
+              className="h-[96px] w-full rounded-[15px] "
+            />
+          ) : (
+            <Cludinary setUrl_Imagen={setUrl_Imagen} Url_Imagen={Url_Imagen} />
+          )}
         </div>
 
-        <form className="flex flex-col items-center gap-1">
+        <form className="flex flex-col items-center  gap-1">
           <div className="flex w-full flex-col ">
             <InputAuth
               type="text"
