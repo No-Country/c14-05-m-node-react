@@ -53,10 +53,19 @@ const deleteInscripcion = async (inscripcionId) => {
   return deletedInscripcion;
 };
 
+const findAllInscripciones = async () => {
+  const allInscripciones = await Inscripcion.findAll({});
+  return allInscripciones;
+};
+
+
+
+
 module.exports = {
   createInscripcion,
   findInscripcionById,
   updateInscripcion,
   deleteInscripcion,
+  findAllInscripciones
 };
 

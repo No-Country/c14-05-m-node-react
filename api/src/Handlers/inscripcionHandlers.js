@@ -2,7 +2,8 @@ const {
   createInscripcion,
   findInscripcionById,
   updateInscripcion,
-  deleteInscripcion 
+  deleteInscripcion,
+  findAllInscripciones
 } = require("../Controllers/inscripcionControllers");
 
 const createInscripcionHandler = async (req, res) => {
@@ -57,10 +58,21 @@ const deleteInscripcionHandler = async (req, res) => {
   }
 };
 
+const findAllInscripcionesHandler = async (req, res) => {
+  try {
+    const allInscripciones = await findAllInscripciones();
+    res.status(200).json(allInscripciones);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
 module.exports = {
   createInscripcionHandler,
   findInscripcionHandler,
   updateInscripcionHandler,
   deleteInscripcionHandler,
+  findAllInscripcionesHandler
 };
 

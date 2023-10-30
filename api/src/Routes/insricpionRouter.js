@@ -6,11 +6,12 @@ const {
   findInscripcionHandler,
   updateInscripcionHandler,
   deleteInscripcionHandler,
+  findAllInscripcionesHandler
 } = require('../Handlers/inscripcionHandlers');
 
 router.post('/', createInscripcionHandler);
 router.get('/:inscripcionId', findInscripcionHandler);
 router.put('/:inscripcionId', updateInscripcionHandler);
 router.delete('/:inscripcionId', deleteInscripcionHandler);
-
+router.get('/', findAllInscripcionesHandler);
 module.exports = router;
