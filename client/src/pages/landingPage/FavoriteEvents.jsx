@@ -1,5 +1,5 @@
-import Card from '../../components/Card'
-import Title2 from '../../components/Title2'
+import Card from '../../components/Card';
+import Title2 from '../../components/Title2';
 
 function FavoriteEvents({data}) {
   return (
@@ -13,7 +13,7 @@ function FavoriteEvents({data}) {
           </div>
         </div>
     </section>
-  )
+  );
 }
 
-export default FavoriteEvents
+export default FavoriteEvents;

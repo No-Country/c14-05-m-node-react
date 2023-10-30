@@ -33,6 +33,36 @@ export const categoriasList = [
   { name: "Tecnologia", svg: <TecnologiaIcon /> },
 ];
 
+export const optionList = [
+  { value: "Musica", label: "Musica", icon: <MusicaIcon /> },
+  { value: "Artes", label: "Artes", icon: <ArteIcon /> },
+  { value: "Bares", label: "Bares", icon: <BaresIcon /> },
+  {
+    value: "Ciencia",
+    label: "Ciencia",
+    icon: <CienciaIcon />,
+  },
+  {
+    value: "Comidas",
+    label: "Comidas",
+    icon: <ComidaIcon />,
+  },
+  {
+    value: "Conciertos",
+    label: "Conciertos",
+    icon: <ConciertoIcon />,
+  },
+  { value: "Cultural", label: "Cultural", icon: <CulturalIcon /> },
+  { value: "Deporte", label: "Deporte", icon: <DeporteIcon /> },
+  { value: "Ecologico", label: "Ecologico", icon: <EcologicoIcon /> },
+  { value: "Fiestas", label: "Fiestas", icon: <FiestaIcon /> },
+  { value: "Infantiles", label: "Infantiles", icon: <InfantilesIcon /> },
+  { value: "Salud", label: "Salud", icon: <SaludIcon /> },
+  { value: "Stand Up", label: "Stand Up", icon: <StandUpIcon /> },
+  { value: "Teatro", label: "Teatro", icon: <TeatroIcon /> },
+  { value: "Tecnologia", label: "Tecnologia", icon: <TecnologiaIcon /> },
+];
+
 function Categorias() {
   return <></>;
 }

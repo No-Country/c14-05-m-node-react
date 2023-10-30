@@ -41,7 +41,8 @@ function UserLocation() {
   }, [location]);
 
   return (
-    <div className="fixed top-0  bg-white p-4 w-screen">
+
+    <div className='fixed top-0 left-0 bg-white p-4 w-screen'>
       <div className=" flex justify-between">
         <div className="flex">
           <img src="/IconLocation.svg" alt="Icono de ubicación" />
