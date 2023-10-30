@@ -7,14 +7,15 @@ function TextAreaDescripcion() {
   const { state } = useLocation();
   useEffect(() => {
     console.log(state);
-    if (state?.eventDescription?.length > 1) {
-      setValueText(state.eventDescription);
+    if (state?.Description?.length > 1) {
+      console.log("test" + state.Description);
+      setValueText(state.Description);
     }
   }, [state]);
 
   const handleSubmit = () => {
     if (state) {
-      const newState = { ...state, eventDescription: valueText };
+      const newState = { ...state, Description: valueText };
       navigate("/crearEventos/form", { state: newState });
     }
   };

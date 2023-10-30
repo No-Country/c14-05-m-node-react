@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../../firebase-config";
 
@@ -6,11 +6,15 @@ export const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
+
   useEffect(() => {
-    //Esto verifica que el usuario este logueado cada vez que monta el componente
-    onAuthStateChanged(auth, (User) => {
-      setCurrentUser(User);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
     });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
