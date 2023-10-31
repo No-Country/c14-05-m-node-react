@@ -12,7 +12,7 @@ function RegisterPage() {
   //Despues hay que implementar react query por ahora esto anda
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
-  const apiUrl = "http://localhost:3001/user";
+  const apiUrl = "https://api-rvi6.onrender.com/user";
 
   const navigate = useNavigate();
 

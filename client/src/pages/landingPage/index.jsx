@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import Navbar from '../../components/Navbar'
-import FavoriteEvents from './FavoriteEvents'
-import FavoriteOrganizers from './FavoriteOrganizers'
-import FindEvent from './FindEvent'
-import NextEventYourZone from './NextEventYourZone'
-import UserLocation from "./UserLocation"
-import axios from 'axios';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
+import FavoriteEvents from "./FavoriteEvents";
+import FavoriteOrganizers from "./FavoriteOrganizers";
+import FindEvent from "./FindEvent";
+import NextEventYourZone from "./NextEventYourZone";
+import UserLocation from "./UserLocation";
 
 function LandingPage() {
   const [data, setData] = useState([]);
-  const apiUrl = "http://localhost:3001/Eventos";
+  const apiUrl = "https://api-rvi6.onrender.com/Eventos";
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,16 +29,15 @@ function LandingPage() {
       <header>
         <UserLocation />
       </header>
-      <main className='my-[76px]'>
+      <main className="my-[76px]">
         <FindEvent />
         <NextEventYourZone data={data} />
-        <FavoriteOrganizers data={data}/>
-        <FavoriteEvents data={data}/>
+        <FavoriteOrganizers data={data} />
+        <FavoriteEvents data={data} />
       </main>
       <Navbar />
     </>
-
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;

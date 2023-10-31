@@ -9,7 +9,7 @@ function CrearEventos() {
 
   const navigate = useNavigate();
 
-  const apiUrl = "http://localhost:3001/Eventos";
+  const apiUrl = "https://api-rvi6.onrender.com/Eventos";
   function handleClickEvento() {
     navigate("/creareventos/Form");
   }
