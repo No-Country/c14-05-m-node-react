@@ -157,10 +157,6 @@ function RegisterPage() {
     },
   ];
 
-  function handleBlur() {
-    setError(false);
-  }
-
   return (
     <div className="sm:flex sm:items-center sm:justify-center">
       <div className="container sm:max-w-lg 2xl:max-w-4xl ">
