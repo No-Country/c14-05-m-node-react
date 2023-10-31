@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { auth, googleProvider } from "../../firebase-config";
+import { auth, facebookProvider, googleProvider } from "../../firebase-config";
 import InputAuth from "../components/InputAuth";
 import LabelAuth from "../components/LabelAuth";
 
@@ -15,6 +15,33 @@ function RegisterPage() {
   const apiUrl = "http://localhost:3001/user";
 
   const navigate = useNavigate();
+
+  const signInWithFb = async () => {
+    console.log("asd");
+    try {
+      const { user } = await signInWithPopup(auth, facebookProvider);
+      if (user) {
+        /*  const data = formatFacebookUserData(user);
+        sentNewUserToBackEnd(data); */
+        console.log(user);
+      }
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
+  };
+  const formatFacebookUserData = (user) => {
+    const fullName = user.displayName;
+    const [nombre, apellido] = fullName.split(" ");
+    const id = user.uid;
+    return {
+      id: id,
+      nombre: nombre,
+      apellido: apellido,
+      email: user.email,
+      isActive: true,
+    };
+  };
 
   const signWithGoogle = async () => {
     try {
@@ -32,9 +59,8 @@ function RegisterPage() {
   const formatGoogleUserData = (user) => {
     const fullName = user.displayName;
     const [nombre, apellido] = fullName.split(" ");
-    const id = user.uid;
     return {
-      id: id,
+      id: user.uid,
       nombre: nombre,
       apellido: apellido,
       email: user.email,
@@ -158,7 +184,7 @@ function RegisterPage() {
   ];
 
   return (
-    <div className="sm:flex sm:items-center sm:justify-center">
+    <div className=" sm:flex sm:items-center sm:justify-center">
       <div className="container sm:max-w-lg 2xl:max-w-4xl ">
         <form onSubmit={formik.handleSubmit} className=" flex w-full flex-col ">
           <h1 className="mb-4 text-left  text-xl font-semibold not-italic leading-8 tracking-[0.15px] sm:text-center sm:text-2xl 2xl:mb-8 2xl:text-center 2xl:text-4xl 2xl:leading-10 2xl:tracking-[0.25px]">
@@ -245,7 +271,10 @@ function RegisterPage() {
           <img src="/IconoGoogle.svg" alt="google icon" />
           <p>Iniciar sesión con Google</p>
         </button>
-        <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
+        <button
+          onClick={signInWithFb}
+          className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none"
+        >
           <img src="/iconoFacebook.svg" alt="facebook icon" />
 
           <p>Iniciar sesión con Facebook</p>
