@@ -108,7 +108,7 @@ function Login() {
               />
 
               <span
-                className="2xl: absolute bottom-[13px] right-4 cursor-pointer "
+                className=" absolute bottom-[13px] right-4 cursor-pointer "
                 onClick={tooglePassword}
               >
                 <img
@@ -124,17 +124,17 @@ function Login() {
             ></LabelAuth>
             <div className="flex items-center justify-center">
               <button
-                className="btn-primary btn-md mb-16 mt-8 flex items-center justify-center rounded-[15px] p-4 2xl:h-16 2xl:w-72 2xl:rounded-none"
+                className="btn-primary btn-md mb-16 mt-8 flex items-center justify-center rounded-[15px] p-4 xl:rounded-none 2xl:h-16 2xl:w-72"
                 type="submit"
               >
-                <h1 className="text-center text-sm text-white 2xl:text-base ">
+                <h1 className="text-center text-sm text-white xl:text-base ">
                   Iniciar sesión
                 </h1>
               </button>
             </div>
           </form>
           {isError ? (
-            <span className="text center text-error 2xl:text-lg">
+            <span className="text center text-error xl:text-lg">
               <h1>Email o Contraseña incorrecto</h1>
             </span>
           ) : (
@@ -150,13 +150,13 @@ function Login() {
           </h2>
           <div className="mb-8 mt-4 h-[1px] w-72 bg-grayB xl:hidden "></div>
           <button
-            className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 2xl:h-14 2xl:rounded-none"
+            className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none"
             onClick={signWithGoogle}
           >
             <img src="/IconoGoogle.svg" alt="google icon" />
             <p>Iniciar sesión con Google</p>
           </button>
-          <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 2xl:h-14 2xl:rounded-none">
+          <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
             <img src="/iconoFacebook.svg" alt="facebook icon" />
 
             <p>Iniciar sesión con Facebook</p>
