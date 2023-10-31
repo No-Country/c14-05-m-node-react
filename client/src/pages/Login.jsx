@@ -65,13 +65,13 @@ function Login() {
 
   return (
     <>
-      <div className="xl:flex xl:items-center xl:justify-center">
-        <div className="container mt-52 flex flex-col items-center font-nunito 2xl:max-w-4xl">
+      <div className="sm:flex sm:items-center sm:justify-center">
+        <div className="container mt-52 flex flex-col items-center font-nunito sm:max-w-lg 2xl:max-w-4xl">
           <form
             onSubmit={formik.handleSubmit}
             className="relative flex  w-full flex-col"
           >
-            <h1 className="mb-4 text-left text-xl font-semibold not-italic leading-8 tracking-[0.15px] 2xl:mb-20 2xl:text-center 2xl:text-4xl 2xl:leading-10 2xl:tracking-[0.25px] ">
+            <h1 className="mb-4 text-left text-xl font-semibold not-italic leading-8 tracking-[0.15px] sm:text-center sm:text-2xl 2xl:mb-20 2xl:text-4xl 2xl:leading-10 2xl:tracking-[0.25px] ">
               Iniciar sesión
             </h1>
             <InputAuth
