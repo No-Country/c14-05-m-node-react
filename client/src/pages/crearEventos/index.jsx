@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { UserContext } from "../../components/UserProvider";
 
 function CrearEventos() {
   const [isActive, setIsActive] = useState(true);
   const [eventos, setEventos] = useState([]);
+  const { currentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -13,14 +15,19 @@ function CrearEventos() {
   function handleClickEvento() {
     navigate("/creareventos/Form");
   }
+  const filterUserEvents = (data) => {
+    const currentUserEvents = data?.filter(
+      (events) => events?.userId == currentUser?.uid,
+    );
+    setEventos(currentUserEvents);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(apiUrl);
-        if (response.data) {
-          setEventos(response.data);
-          console.log(response);
+        if (response?.data) {
+          filterUserEvents(response.data);
         }
       } catch (error) {
         console.log(error);
