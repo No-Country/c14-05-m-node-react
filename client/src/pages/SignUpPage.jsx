@@ -12,7 +12,7 @@ function RegisterPage() {
   //Despues hay que implementar react query por ahora esto anda
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
-  const apiUrl = "http://localhost:3001/user";
+  const apiUrl = "https://api-rvi6.onrender.com/user";
 
   const navigate = useNavigate();
 
@@ -48,7 +48,6 @@ function RegisterPage() {
       response = await axios.post(apiUrl, data);
       if (response.status === 201) {
         console.log("Usuario Creado");
-        navigate("/onboarding");
       }
     } catch (error) {
       if (error.response?.status === 409) {
@@ -71,7 +70,7 @@ function RegisterPage() {
       };
       const response = await axios.post(apiUrl, data);
       if (response.status === 201) {
-        navigate("/");
+        navigate("/onboarding");
       }
     } catch (error) {
       setError(true);

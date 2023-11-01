@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import NavbarDesktop from "../../components/NavbarDesktop";
 import { UserContext } from "../../components/UserProvider";
 
 function ConfimacionEvento() {
@@ -11,7 +12,7 @@ function ConfimacionEvento() {
     //tienen que dejar pasar una string mas larga los de back
     const id = currentUser?.uid;
     const data = { ...state, userid: id };
-    const apiUrl = "http://localhost:3001/Eventos";
+    const apiUrl = "https://api-rvi6.onrender.com/Eventos";
     //hacemos un post con el state al server
     console.log(currentUser);
     try {
