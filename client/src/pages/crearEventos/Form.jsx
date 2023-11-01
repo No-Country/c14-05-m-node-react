@@ -70,8 +70,7 @@ function Form() {
       fecha: "",
       hora: "",
       costo: "",
-      image:
-        "https://i.pinimg.com/originals/0e/92/70/0e92700ad79be25fa4cabd77c9f4e10e.jpg",
+      image: Url_Imagen,
       etiquetas: "Música",
       isActive: "true",
       userid: "",
