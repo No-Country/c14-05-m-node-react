@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import NavbarDesktop from "../../components/NavbarDesktop";
 import { UserContext } from "../../components/UserProvider";
 
 function ConfimacionEvento() {

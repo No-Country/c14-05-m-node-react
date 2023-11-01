@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import InputAuth from "../../components/InputAuth";
+import NavbarDesktop from "../../components/NavbarDesktop";
+
 import TopNavCrearEventos from "../../components/TopNavCrearEventos";
 
 function Entradas() {

@@ -5,6 +5,7 @@ import Select from "react-select";
 import * as Yup from "yup";
 import InputAuth from "../../components/InputAuth";
 import LabelAuth from "../../components/LabelAuth";
+import NavbarDesktop from "../../components/NavbarDesktop";
 import TopNavCrearEventos from "../../components/TopNavCrearEventos";
 import { optionList } from "../../utils/Categorias";
 import { customStyles } from "../../utils/styleSelect";
