@@ -23,9 +23,8 @@ function DatePicker() {
 
   return (
     <>
-      <nav className="hidden h-20 w-full bg-gray-300 lg:block ">
-        placeholder navbar
-      </nav>
+      <NavbarDesktop />
+
       <div className="flex flex-col items-center justify-center lg:mt-4">
         <TopNavCrearEventos url={"/crearEventos/Form"} completed={1} />
         <div className="flex flex-col items-center lg:container lg:max-w-3xl">

@@ -159,7 +159,7 @@ function RegisterPage() {
 
   return (
     <div className="sm:flex sm:items-center sm:justify-center">
-      <div className="container sm:max-w-lg 2xl:max-w-4xl ">
+      <div className="container sm:max-w-lg  md:rounded-[15px] md:p-10  md:shadow-[0px_0px_15px_0px_rgba(0,0,0,0.15)] 2xl:max-w-[752px] ">
         <form onSubmit={formik.handleSubmit} className=" flex w-full flex-col ">
           <h1 className="mb-4 text-left  text-xl font-semibold not-italic leading-8 tracking-[0.15px] sm:text-center sm:text-2xl 2xl:mb-8 2xl:text-center 2xl:text-4xl 2xl:leading-10 2xl:tracking-[0.25px]">
             Registrate

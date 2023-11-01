@@ -66,7 +66,7 @@ function Login() {
   return (
     <>
       <div className="sm:flex sm:items-center sm:justify-center">
-        <div className="container mt-52 flex flex-col items-center font-nunito sm:max-w-lg 2xl:max-w-4xl">
+        <div className="container mt-52 flex flex-col items-center font-nunito sm:max-w-lg md:rounded-[15px] md:p-10  md:shadow-[0px_0px_15px_0px_rgba(0,0,0,0.15)] 2xl:max-w-[752px] ">
           <form
             onSubmit={formik.handleSubmit}
             className="relative flex  w-full flex-col"
@@ -124,7 +124,7 @@ function Login() {
             ></LabelAuth>
             <div className="flex items-center justify-center">
               <button
-                className="btn-primary btn-md mb-16 mt-8 flex items-center justify-center rounded-[15px] p-4 xl:rounded-none 2xl:h-16 2xl:w-72"
+                className=" btn-primary btn-md mb-16 mt-8 flex  w-[90%] items-center justify-center  rounded-[15px] p-4 2xl:h-16"
                 type="submit"
               >
                 <h1 className="text-center text-sm text-white xl:text-base ">

@@ -25,9 +25,8 @@ function ConfimacionEvento() {
 
   return (
     <>
-      <nav className="hidden h-20 w-full bg-gray-300 lg:block ">
-        placeholder navbar
-      </nav>
+      <NavbarDesktop />
+
       <div className="flex h-14 w-[360px]  items-center justify-start gap-1 font-nunito lg:hidden">
         <Link to={"../creareventos"}>
           <img src="/crear-eventos/close-icon.svg" alt="close" />

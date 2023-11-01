@@ -4,9 +4,8 @@ function EventoConfirmado() {
   const navigate = useNavigate();
   return (
     <>
-      <nav className="hidden h-20 w-full bg-gray-300 lg:block ">
-        placeholder navbar
-      </nav>
+      <NavbarDesktop />
+
       <div className="flex h-screen items-center justify-center">
         <div className="flex flex-col items-center lg:container lg:mt-0 lg:max-w-xl">
           <img

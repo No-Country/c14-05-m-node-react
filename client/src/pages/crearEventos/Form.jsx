@@ -101,9 +101,8 @@ function Form() {
   };
   return (
     <>
-      <nav className="hidden h-20 w-full bg-gray-300 lg:block ">
-        placeholder navbar
-      </nav>
+      <NavbarDesktop />
+
       <TopNavCrearEventos url="../creareventos" />
       <div className="flex w-full items-center justify-center ">
         <div className=" lg:container  ">

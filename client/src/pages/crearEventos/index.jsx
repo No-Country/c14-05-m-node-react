@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import NavbarDesktop from "../../components/NavbarDesktop";
 import { UserContext } from "../../components/UserProvider";
 
 function CrearEventos() {
@@ -39,9 +40,7 @@ function CrearEventos() {
 
   return (
     <>
-      <nav className="hidden h-20 w-full bg-gray-300 lg:block ">
-        placeholder navbar
-      </nav>
+      <NavbarDesktop />
       <div className="flex w-full items-center justify-center">
         <div className="flex w-full flex-col gap-4  font-nunito lg:container lg:items-center lg:justify-center">
           <h1 className="my-4 ml-3 mr-4 h-8 text-xl font-semibold not-italic leading-8 tracking-[0.15px] text-black lg:text-2xl">
