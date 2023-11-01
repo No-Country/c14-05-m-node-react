@@ -3,7 +3,7 @@ import InputSearch from "./InputSearch";
 import { UserContext } from "../components/UserProvider";
 import { useContext } from "react";
 
-function NavbarDesktop({ namePlace }) {
+function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
   const links = [
     {
       icon: "/iconNavbar/IconHome.svg",
@@ -14,7 +14,7 @@ function NavbarDesktop({ namePlace }) {
     {
       icon: "/iconNavbar/IconEvent.svg",
       linkName: "Crear evento",
-      rute: "/eventos",
+      rute: "/CrearEventos",
       isLogged: true,
     },
     {
@@ -52,7 +52,8 @@ function NavbarDesktop({ namePlace }) {
     <div className=" hidden md:block ">
       <div className="flex items-center justify-between ">
         <div><span className="text-primary">Even</span><span className="text-accent">Flow</span></div>
-        <InputSearch />
+        <InputSearch searchedEvent={searchedEvent}
+        onChangeHandler={onChangeHandler}/>
         <nav className="">
           <ul className="ml-0 flex space-x-4 mr-[50px]">
             {userLinks.map((link, index) => {

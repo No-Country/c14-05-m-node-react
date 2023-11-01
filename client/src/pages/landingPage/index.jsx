@@ -14,6 +14,7 @@ function LandingPage() {
 
   // Get coordinates
   const [location, setLocation] = useState(null);
+  const [searchedEvent, setSearchedEvent] = useState("");
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -63,15 +64,23 @@ function LandingPage() {
     }
   }, [location]);
 
+  const onChangeHandler = (e) => {
+    setSearchedEvent(e.target.value);
+  };
+  const searchMatches = data.filter(function (d) {
+    return d.titulo.includes(searchedEvent);
+});
+
   return (
     <>
       <header className='fixed left-0 top-0 right-0 w-screen p-4 bg-white border border-b-4'>
-        <NavbarDesktop namePlace={namePlace}/>
+        <NavbarDesktop namePlace={namePlace} searchedEvent={searchedEvent}
+        onChangeHandler={onChangeHandler}/>
         <UserLocation namePlace={namePlace}/>
       </header>
       <main className={window.innerWidth <= 768?'my-[56px]':'my-[104px]'}>
         <FindEvent />
-        {(data.length>0)&&(namePlace!=null) ? <div>
+        {(searchMatches.length>0)&&(namePlace!=null) ? <div>
           <NextEventYourZone data={data} namePlace={namePlace!=null?namePlace.address.state:""} />
         <FavoriteOrganizers data={data}/>
         <FavoriteEvents data={data}/>
