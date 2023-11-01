@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import InputSearch from "./InputSearch";
-import { UserContext } from "../components/UserProvider";
+import { UserContext } from "./UserProvider";
 import { useContext } from "react";
 
-function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
+function NavbarDesktop() {
   const links = [
     {
       icon: "/iconNavbar/IconHome.svg",
@@ -49,11 +48,9 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
   }
 
   return (
-    <div className=" hidden md:block ">
+    <div className=" hidden md:block fixed left-0 right-0 top-0 w-screen border border-b-4 bg-white p-4 mb-[-1rem]">
       <div className="flex items-center justify-between ">
         <div><span className="text-primary">Even</span><span className="text-accent">Flow</span></div>
-        <InputSearch searchedEvent={searchedEvent}
-        onChangeHandler={onChangeHandler}/>
         <nav className="">
           <ul className="ml-0 flex space-x-4 mr-[50px]">
             {userLinks.map((link, index) => {
@@ -66,15 +63,6 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
           </ul>
         </nav>
       </div>
-      {/* Location */}
-      <div className="flex">
-          <img src="/IconLocation.svg" alt="Icono de ubicación" />
-          <div>
-            {namePlace
-              ? `${namePlace.address.state} ${namePlace.address.country}`
-              : "Permitenos acceder a tu ubicación"}
-          </div>
-        </div>
     </div>
   );
 }
