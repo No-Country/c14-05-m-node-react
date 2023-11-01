@@ -1,12 +1,12 @@
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
+import NavbarDesktop from '../../components/NavbarDesktop'
 import FavoriteEvents from './FavoriteEvents'
 import FavoriteOrganizers from './FavoriteOrganizers'
 import FindEvent from './FindEvent'
 import NextEventYourZone from './NextEventYourZone'
 import UserLocation from "./UserLocation"
-import axios from 'axios';
-import NavbarDesktop from '../../components/NavbarDesktop'
 
 function LandingPage() {
   const [data, setData] = useState([]);
@@ -89,8 +89,7 @@ function LandingPage() {
       </main>
       <Navbar />
     </>
-
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;
