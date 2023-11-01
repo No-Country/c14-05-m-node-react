@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import InputSearch from "./InputSearch";
-import { UserContext } from "../components/UserProvider";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../components/UserProvider";
+import InputSearch from "./InputSearch";
 
 function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
   const links = [
@@ -30,7 +30,7 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
       isLogged: true,
     },
     {
-      linkName: "Iniciar seción",
+      linkName: "Iniciar sesión",
       rute: "/login",
       isLogged: false,
     },
@@ -40,22 +40,27 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
       isLogged: false,
     },
   ];
-  let userLinks = []
+  let userLinks = [];
   const { currentUser } = useContext(UserContext);
-  if(currentUser?.email){
-    userLinks = links.filter(link=>link.isLogged==true)
-  }else{
-    userLinks = links.filter(link=>link.isLogged==false)
+  if (currentUser?.email) {
+    userLinks = links.filter((link) => link.isLogged == true);
+  } else {
+    userLinks = links.filter((link) => link.isLogged == false);
   }
 
   return (
     <div className=" hidden md:block ">
       <div className="flex items-center justify-between ">
-        <div><span className="text-primary">Even</span><span className="text-accent">Flow</span></div>
-        <InputSearch searchedEvent={searchedEvent}
-        onChangeHandler={onChangeHandler}/>
+        <div>
+          <span className="text-primary">Even</span>
+          <span className="text-accent">Flow</span>
+        </div>
+        <InputSearch
+          searchedEvent={searchedEvent}
+          onChangeHandler={onChangeHandler}
+        />
         <nav className="">
-          <ul className="ml-0 flex space-x-4 mr-[50px]">
+          <ul className="ml-0 mr-[50px] flex space-x-4">
             {userLinks.map((link, index) => {
               return (
                 <li className="" key={index}>
@@ -67,13 +72,13 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
         </nav>
       </div>
       <div className="flex">
-          <img src="/IconLocation.svg" alt="Icono de ubicación" />
-          <div>
-            {namePlace
-              ? `${namePlace.address.state} ${namePlace.address.country}`
-              : "Permitenos acceder a tu ubicación"}
-          </div>
+        <img src="/IconLocation.svg" alt="Icono de ubicación" />
+        <div>
+          {namePlace
+            ? `${namePlace.address.state} ${namePlace.address.country}`
+            : "Permitenos acceder a tu ubicación"}
         </div>
+      </div>
     </div>
   );
 }
