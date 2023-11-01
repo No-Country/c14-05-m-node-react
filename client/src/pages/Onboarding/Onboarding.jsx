@@ -30,12 +30,12 @@ function Onboarding() {
   console.log(currentSlide);
 
   return (
-    <div className=" bg-secondary ">
-      <div className="flex flex-col items-center justify-center gap-10 pt-40 font-nunito  text-dark ">
-        <div className="carousel w-64  ">
+    <div className=" flex  justify-center bg-secondary ">
+      <div className="container flex flex-col items-center justify-center gap-10 font-nunito  text-dark sm:max-w-xs xl:mt-[40px] xl:max-w-lg ">
+        <div className="carousel  ">
           <div id="item1" className="carousel-item flex w-full flex-col">
             <img src="/onboarding/onboarding1.png" className="w-full" />
-            <h1 className="text-center text-xl ">
+            <h1 className="text-center text-xl xl:text-3xl 2xl:text-4xl">
               Encontrá tus eventos favoritos
             </h1>
           </div>
@@ -74,20 +74,24 @@ function Onboarding() {
           ></a>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 xl:pb-4">
           <a
             href={`#item${currentSlide}`}
             onClick={changeSlide}
-            className="btn-primary btn-wide flex h-12 items-center justify-center rounded-[15px]"
+            className="btn-primary btn-wide flex h-12 items-center justify-center rounded-[15px] xl:rounded-none 2xl:h-16 2xl:w-72 "
           >
-            <h1 className="text-center text-sm text-white">Siguiente</h1>
+            <h1 className="text-center text-sm text-white xl:text-base">
+              Siguiente
+            </h1>
           </a>
 
           <button
-            className="btn-secondary btn-wide flex h-12  items-center justify-center rounded-[15px]"
+            className="btn-secondary btn-wide flex h-12  items-center justify-center rounded-[15px] xl:rounded-none 2xl:h-16 2xl:w-72  "
             onClick={navigateToPreferencias}
           >
-            <h1 className="text-center text-sm text-primary">Omitir</h1>
+            <h1 className="text-center text-sm text-primary xl:text-base">
+              Omitir
+            </h1>
           </button>
         </div>
       </div>
