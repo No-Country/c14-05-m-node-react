@@ -48,7 +48,6 @@ function RegisterPage() {
       response = await axios.post(apiUrl, data);
       if (response.status === 201) {
         console.log("Usuario Creado");
-        navigate("/onboarding");
       }
     } catch (error) {
       if (error.response?.status === 409) {
@@ -71,7 +70,7 @@ function RegisterPage() {
       };
       const response = await axios.post(apiUrl, data);
       if (response.status === 201) {
-        navigate("/");
+        navigate("/onboarding");
       }
     } catch (error) {
       setError(true);
