@@ -87,8 +87,7 @@ function LandingPage() {
           <div>
             <NextEventYourZone
               data={searchMatches}
-              // namePlace={namePlace != null ? namePlace.address.state : ""}
-              namePlace={namePlace != null ? "Mendoza" : ""}
+              namePlace={namePlace != null ? namePlace.address.state : ""}
             />
             <FavoriteOrganizers data={data} />
             <FavoriteEvents data={data} />
