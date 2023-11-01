@@ -6,6 +6,7 @@ import UserProvider from "./components/UserProvider.jsx";
 import "./index.css";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import LoggedUserPage from "./pages/LoggedUserPage.jsx";
 import Login from "./pages/Login.jsx";
 import Onboarding from "./pages/Onboarding/Onboarding.jsx";
 import Preferencias from "./pages/Onboarding/Preferencias.jsx";
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
   { path: "CrearEventos/textarea", element: <TextAreaDescripcion /> },
   { path: "CrearEventos/evento-creado", element: <EventoExito /> },
   { path: "CrearEventos/evento-confirmado", element: <EventoConfirmado /> },
+  {
+    path: "logout",
+    element: <LoggedUserPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

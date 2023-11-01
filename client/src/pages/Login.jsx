@@ -1,19 +1,19 @@
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { auth, googleProvider } from "../../firebase-config";
 import InputAuth from "../components/InputAuth";
 import LabelAuth from "../components/LabelAuth";
 import { UserContext } from "../components/UserProvider";
 import LoggedUserPage from "./LoggedUserPage";
-
 function Login() {
   const { currentUser } = useContext(UserContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
 
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -38,6 +38,7 @@ function Login() {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
         const userToken = await user.getIdToken();
+        navigate("/");
       }
     } catch (err) {
       setError(true);
@@ -52,6 +53,7 @@ function Login() {
       console.log(user);
       if (user) {
         //Esto seria el token que tenemos que mandar al back
+        navigate("/");
       }
     } catch (error) {
       setError(true);
