@@ -2,41 +2,52 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const links = [
+    {
+      icon: "/iconNavbar/IconHome.svg",
+      linkName: "Inicio",
+      rute: "/",
+    },
+    {
+      icon: "/iconNavbar/IconEvent.svg",
+      linkName: "Eventos",
+      rute: "/eventos",
+    },
+    {
+      icon: "/iconNavbar/IconAddEvent.svg",
+      linkName: "Publicar",
+      rute: "/CrearEventos",
+    },
+    {
+      icon: "/iconNavbar/IconTicket.svg",
+      linkName: "Boletos",
+      rute: "/",
+    },
+    {
+      icon: "/iconNavbar/IconProfile.svg",
+      linkName: "Perfil",
+      rute: "/",
+    },
+  ];
   return (
-    <nav>
-      <ul className="flex space-x-4 bg-primary px-2">
-        <li className="px-1 py-2">
-            <Link to="/" className="flex flex-col items-center">
-                <img src="/IconHome.svg" alt="Icon home" className=""/>
-                <span className="text-white hover:text-yellow-400">Inicio</span>
-            </Link>
-        </li>
-        <li className="px-1 py-2">
-          <Link to="/events" className="flex flex-col items-center">
-            <img src="/IconEvent.svg" alt="Icon event" />
-            <span className="text-white">Eventos</span>
-          </Link>
-        </li>
-        <li className="px-1 py-2">
-          <Link to="/add-event" className="flex flex-col items-center">
-            <img src="/IconAddEvent.svg" alt="Icon Add" />
-            <span className="text-white">Publicar</span>
-          </Link>
-        </li>
-        <li className="px-1 py-2">
-          <Link to="/ticket" className="flex flex-col items-center">
-            <img src="/IconTicket.svg" alt="Icon ticket" />
-            <span className="text-white">Boletos</span>
-          </Link>
-        </li>
-        <li className="px-1 py-2">
-          <Link to="/profile" className="flex flex-col items-center">
-            <img src="/IconProfile.svg" alt="Icon profile" />
-            <span className="text-white">Perfil</span>
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <div className="fixed bottom-0 left-0">
+      <nav className="flex w-screen justify-center bg-primary p-2">
+        <ul className="flex space-x-2 ml-0">
+          {links.map((link, index) => {
+            return (
+              <li className="w-[60px]" key={index}>
+                <Link to={link.rute} className="flex flex-col items-center">
+                  <img src={link.icon} alt="Icon home" className="" />
+                  <span className="font-nunito text-white">
+                    {link.linkName}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
   );
 }
 

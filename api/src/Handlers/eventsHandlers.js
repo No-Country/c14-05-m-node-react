@@ -17,6 +17,8 @@ const createEventHandler = async (req, res) => {
       fecha,
       hora,
       costo,
+      image,
+      etiquetas,
       isActive,
       userid,
     } = req.body;
@@ -28,6 +30,8 @@ const createEventHandler = async (req, res) => {
       fecha,
       hora,
       costo,
+      image,
+      etiquetas,
       isActive,
       userid
     );
@@ -76,6 +80,8 @@ const updateEventByIdHandler = async (req, res) => {
       fecha,
       hora,
       costo,
+      image,
+      etiquetas,
       isActive,
       userid,
     } = req.body;
@@ -87,6 +93,8 @@ const updateEventByIdHandler = async (req, res) => {
       fecha,
       hora,
       costo,
+      image,
+      etiquetas,
       isActive,
       userid
     );
