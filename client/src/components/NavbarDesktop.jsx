@@ -49,7 +49,7 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
   }
 
   return (
-    <div className=" hidden md:block ">
+    <div className=" hidden pt-4 md:block ">
       <div className="flex items-center justify-between ">
         <div>
           <span className="text-primary">Even</span>
