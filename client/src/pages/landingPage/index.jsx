@@ -6,6 +6,7 @@ import FindEvent from './FindEvent'
 import NextEventYourZone from './NextEventYourZone'
 import UserLocation from "./UserLocation"
 import axios from 'axios';
+import NavbarDesktop from '../../components/NavbarDesktop'
 
 function LandingPage() {
   const [data, setData] = useState([]);
@@ -61,13 +62,14 @@ function LandingPage() {
         });
     }
   }, [location]);
-  console.log(namePlace)
+
   return (
     <>
-      <header>
+      <header className='fixed left-0 top-0 right-0 w-screen p-4 bg-white border border-b-4'>
+        <NavbarDesktop namePlace={namePlace}/>
         <UserLocation namePlace={namePlace}/>
       </header>
-      <main className='my-[56px]'>
+      <main className={window.innerWidth <= 768?'my-[56px]':'my-[104px]'}>
         <FindEvent />
         {(data.length>0)&&(namePlace!=null) ? <div>
           <NextEventYourZone data={data} namePlace={namePlace!=null?namePlace.address.state:""} />
