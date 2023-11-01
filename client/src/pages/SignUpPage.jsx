@@ -32,7 +32,7 @@ function RegisterPage() {
   const formatGoogleUserData = (user) => {
     const fullName = user.displayName;
     const [nombre, apellido] = fullName.split(" ");
-    const id = user.uid.substring(0, 10);
+    const id = user.uid;
     return {
       id: id,
       nombre: nombre,
@@ -157,91 +157,100 @@ function RegisterPage() {
     },
   ];
 
-  function handleBlur() {
-    setError(false);
-  }
-
   return (
-    <div className="container font-nunito ">
-      <form onSubmit={formik.handleSubmit} className=" flex w-full flex-col ">
-        <h1 className="mb-4 text-left text-xl">Registrate</h1>
-        {inputFields.map((field) => (
-          <React.Fragment key={field.name}>
+    <div className="sm:flex sm:items-center sm:justify-center">
+      <div className="container sm:max-w-lg 2xl:max-w-4xl ">
+        <form onSubmit={formik.handleSubmit} className=" flex w-full flex-col ">
+          <h1 className="mb-4 text-left  text-xl font-semibold not-italic leading-8 tracking-[0.15px] sm:text-center sm:text-2xl 2xl:mb-8 2xl:text-center 2xl:text-4xl 2xl:leading-10 2xl:tracking-[0.25px]">
+            Registrate
+          </h1>
+          {inputFields.map((field) => (
+            <React.Fragment key={field.name}>
+              <InputAuth
+                type={field.type}
+                name={field.name}
+                error={formik.touched[field.name] && formik.errors[field.name]}
+                placeholder={field.placeholder}
+                onChange={formik.handleChange}
+                value={formik.values[field.name]}
+                onBlur={(e) => {
+                  formik.handleBlur(e);
+                  setError(false);
+                }}
+                required
+              />
+              <LabelAuth
+                htmlFor={field.name}
+                error={formik.touched[field.name] && formik.errors[field.name]}
+              >
+                {field.label}
+              </LabelAuth>
+            </React.Fragment>
+          ))}
+
+          <div className="relative text-left">
             <InputAuth
-              type={field.type}
-              name={field.name}
-              error={formik.touched[field.name] && formik.errors[field.name]}
-              placeholder={field.placeholder}
+              type={`${isPasswordVisible ? "text" : "password"}`}
+              name="password"
+              placeholder="Contraseña"
               onChange={formik.handleChange}
-              value={formik.values[field.name]}
-              onBlur={handleBlur}
+              value={formik.values.password}
+              onBlur={(e) => {
+                formik.handleBlur(e);
+                setError(false);
+              }}
+              error={formik.touched.password && formik.errors.password}
               required
             />
-            <LabelAuth
-              htmlFor={field.name}
-              error={formik.touched[field.name] && formik.errors[field.name]}
+
+            <span
+              className="absolute bottom-[13px] right-4 cursor-pointer "
+              onClick={tooglePassword}
             >
-              {field.label}
-            </LabelAuth>
-          </React.Fragment>
-        ))}
-
-        <div className="relative text-left">
-          <InputAuth
-            type={`${isPasswordVisible ? "text" : "password"}`}
-            name="password"
-            placeholder="Contraseña"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
+              <img
+                src={`${
+                  isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
+                }`}
+              />
+            </span>
+          </div>
+          <LabelAuth
+            htmlFor="password"
             error={formik.touched.password && formik.errors.password}
-            required
-          />
-
-          <span
-            className="absolute bottom-[13px] right-4 cursor-pointer "
-            onClick={tooglePassword}
-          >
-            <img
-              src={`${
-                isPasswordVisible ? "/input/icon_1.svg" : " /input/icon.svg"
-              }`}
-            />
+          ></LabelAuth>
+          <div className="flex items-center justify-center">
+            <button
+              className="btn-primary btn-md mb-16 mt-8 flex items-center justify-center rounded-[15px] p-4 xl:h-16 xl:w-72 xl:rounded-none"
+              type="submit"
+            >
+              <h1 className="text-center text-sm  text-white 2xl:text-base">
+                Registrarse
+              </h1>
+            </button>
+          </div>
+        </form>
+        {isError ? (
+          <span className="text center mb-4 text-error">
+            <h1>Error al crear el usuario </h1>
           </span>
-        </div>
-        <LabelAuth
-          htmlFor="password"
-          error={formik.touched.password && formik.errors.password}
-        ></LabelAuth>
+        ) : (
+          ""
+        )}
 
+        <div className=" mb-8 h-[1px] w-72 bg-grayB xl:hidden"></div>
         <button
-          className="btn-primary btn-md mb-8 mt-8 flex h-12 items-center justify-center rounded-[15px] p-4"
-          type="submit"
+          onClick={signWithGoogle}
+          className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none"
         >
-          <h1 className="text-center text-sm text-white">Registrarse</h1>
+          <img src="/IconoGoogle.svg" alt="google icon" />
+          <p>Iniciar sesión con Google</p>
         </button>
-      </form>
-      {isError ? (
-        <span className="text center mb-4 text-error">
-          <h1>Error al crear el usuario </h1>
-        </span>
-      ) : (
-        ""
-      )}
+        <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
+          <img src="/iconoFacebook.svg" alt="facebook icon" />
 
-      <div className=" mb-8 h-[1px] w-72 bg-grayB"></div>
-      <button
-        onClick={signWithGoogle}
-        className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90"
-      >
-        <img src="/IconoGoogle.svg" alt="google icon" />
-        <p>Iniciar sesión con Google</p>
-      </button>
-      <button className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90">
-        <img src="/iconoFacebook.svg" alt="facebook icon" />
-
-        <p>Iniciar sesión con Facebook</p>
-      </button>
+          <p>Iniciar sesión con Facebook</p>
+        </button>
+      </div>
     </div>
   );
 }

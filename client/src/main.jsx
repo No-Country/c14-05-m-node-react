@@ -13,6 +13,7 @@ import RegisterPage from "./pages/SignUpPage.jsx";
 import ConfimacionEvento from "./pages/crearEventos/ConfimacionEvento.jsx";
 import DatePicker from "./pages/crearEventos/DatePicker.jsx";
 import Entradas from "./pages/crearEventos/Entradas.jsx";
+import EventoConfirmado from "./pages/crearEventos/EventoConfirmado.jsx";
 import EventoExito from "./pages/crearEventos/EventoExito.jsx";
 import Form from "./pages/crearEventos/Form.jsx";
 import TextAreaDescripcion from "./pages/crearEventos/TextAreaDescripcion.jsx";
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
   { path: "CrearEventos/confirmar", element: <ConfimacionEvento /> },
   { path: "CrearEventos/textarea", element: <TextAreaDescripcion /> },
   { path: "CrearEventos/evento-creado", element: <EventoExito /> },
+  { path: "CrearEventos/evento-confirmado", element: <EventoConfirmado /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
