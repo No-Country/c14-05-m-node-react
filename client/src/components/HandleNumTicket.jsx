@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-function HandleNumTicket({amount, setAmount}) {
+function HandleNumTicket({amount, setAmount,price}) {
 
   return (
     <div className="rounded-[14px] border border-primary p-4 w-[20.5rem] h-[6rem] flex justify-between items-center">
@@ -9,7 +7,7 @@ function HandleNumTicket({amount, setAmount}) {
         <p className="text-grayB font-medium text-xs">Incluye una consumición</p>
         <div className="flex items-center mt-3">
           $
-          <div className="font-medium text-xs ml-1">500</div>
+          <div className="font-medium text-xs ml-1">{price}</div>
         </div>
       </div>
       <div className="flex space-x-2">

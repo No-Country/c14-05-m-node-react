@@ -7,7 +7,7 @@ import Info from "../../components/Info";
 function PurchaseSommary() {
   const { state } = useLocation();
   let navigate = useNavigate();
-  console.log(state);
+console.log(state)
   return (
     <div className="my-4">
       <BackPage />
@@ -23,9 +23,17 @@ function PurchaseSommary() {
             <div>x{state.amount}</div>
             <p>Entradas generales</p>
         </div>
-
         <div className="mt-3 flex items-center">
-          <div className="font-normal">$500</div>
+          <div className="font-normal">${state.costo*state.amount}</div>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <div className="flex space-x-2">
+            <div>x{state.amountPro}</div>
+            <p>Entradas Pro</p>
+        </div>
+        <div className="mt-3 flex items-center">
+          <div className="font-normal">${state.costo*state.amountPro}</div>
         </div>
       </div>
       <div className="fixed bottom-4">
@@ -34,14 +42,14 @@ function PurchaseSommary() {
       <div className="flex justify-between items-center mb-8">
         <div>Subtotal</div>
         <div className="flex items-center mt-3">
-          <div className="font-normal">$500</div>
+          <div className="font-normal">${state.costo*state.amount + state.costo*state.amountPro}</div>
         </div>
       </div>
 
       <button
         className="btn-primary w-full rounded-[15px] p-4"
         type="button"
-        onClick={() => navigate("/reserva-finalizada")}
+        onClick={() => navigate("/reserva-finalizada",{state:state})}
       >
         Reservar
       </button>
