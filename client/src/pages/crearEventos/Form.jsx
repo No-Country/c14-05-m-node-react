@@ -101,106 +101,120 @@ function Form() {
   };
   return (
     <>
+      <nav className="hidden h-20 w-full bg-gray-300 lg:block ">
+        placeholder navbar
+      </nav>
       <TopNavCrearEventos url="../creareventos" />
-      <div className="w-full ">
-        <div class="mb-4 mt-12 w-full items-center justify-center">
-          {Url_Imagen ? (
-            <img
-              src={Url_Imagen}
-              alt="img"
-              className="h-[96px] w-full rounded-[15px] "
-            />
-          ) : (
-            <Cludinary setUrl_Imagen={setUrl_Imagen} Url_Imagen={Url_Imagen} />
-          )}
+      <div className="flex w-full items-center justify-center ">
+        <div className=" lg:container  ">
+          <div className="lg:flex lg:min-w-full lg:flex-col lg:items-center lg:justify-center">
+            <form className="flex flex-col items-center  gap-1 lg:w-[600px]">
+              <div className="w-full">
+                <h1 className="mt-20 hidden text-4xl font-semibold not-italic leading-10 tracking-[0.25px] text-black lg:block">
+                  Descripcion
+                </h1>
+              </div>
+              <div class="mb-4 mt-12 w-full items-center justify-center ">
+                {Url_Imagen ? (
+                  <img
+                    src={Url_Imagen}
+                    alt="img"
+                    className="h-[96px] w-full rounded-[15px] lg:h-44 "
+                  />
+                ) : (
+                  <Cludinary
+                    setUrl_Imagen={setUrl_Imagen}
+                    Url_Imagen={Url_Imagen}
+                  />
+                )}
+              </div>
+              <div className="flex w-full flex-col ">
+                <InputAuth
+                  type="text"
+                  name="eventName"
+                  error={formik.touched.eventName && formik.errors.eventName}
+                  placeholder="Nombre del evento"
+                  onChange={formik.handleChange}
+                  value={formik.values.eventName}
+                  onBlur={formik.handleBlur}
+                  required
+                />
+                <LabelAuth
+                  htmlFor="eventName"
+                  error={formik.touched.eventName && formik.errors.eventName}
+                ></LabelAuth>
+              </div>
+
+              <div className="flex w-full flex-col">
+                <InputAuth
+                  type="text"
+                  name="eventLocation"
+                  error={
+                    formik.touched.eventLocation && formik.errors.eventLocation
+                  }
+                  placeholder="Ingresá la ubicación"
+                  onChange={formik.handleChange}
+                  value={formik.values.eventLocation}
+                  onBlur={formik.handleBlur}
+                  required
+                />
+                <LabelAuth
+                  htmlFor="eventLocation"
+                  error={
+                    formik.touched.eventLocation && formik.errors.eventLocation
+                  }
+                ></LabelAuth>
+              </div>
+
+              <div
+                className="flex min-w-full flex-col"
+                onClick={handleClickTextInput}
+              >
+                <input
+                  className="h-12 w-full cursor-pointer rounded-[15px] border border-dark pl-4 pr-10 text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none "
+                  placeholder="Descripción del evento"
+                  value={textArea}
+                  readOnly
+                />
+              </div>
+
+              <div className="mt-4  flex w-full flex-col text-dark">
+                <Select
+                  options={optionList}
+                  styles={customStyles}
+                  placeholder="Etiquetas"
+                  value={CurrentSelectedOption}
+                  onChange={handleChange}
+                  readOnly
+                  formatOptionLabel={({ label, icon }) => (
+                    <div className="flex w-full flex-row items-center gap-4    text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none focus:border-accent active:border-accent ">
+                      {icon} {label}
+                    </div>
+                  )}
+                />
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {Array.from(selectedOptionsList).map((value, index) => (
+                    <div
+                      className="flex items-start justify-start gap-2 rounded-[15px] bg-primary px-3 py-1 text-white "
+                      key={index}
+                    >
+                      <p className=" text-sm font-normal not-italic leading-6 tracking-[0.25px] lg:text-base">
+                        {value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <button
+                className="btn-primary btn-md  mb-16  mt-72 flex  w-[328px] items-center justify-center rounded-[15px] p-4 disabled:bg-grayC disabled:text-grayB lg:mt-40"
+                onClick={handleSubmit}
+                disabled={!formik.isValid}
+              >
+                <h1 className="text-center text-sm ">Continuar</h1>
+              </button>
+            </form>
+          </div>
         </div>
-
-        <form className="flex flex-col items-center  gap-1">
-          <div className="flex w-full flex-col ">
-            <InputAuth
-              type="text"
-              name="eventName"
-              error={formik.touched.eventName && formik.errors.eventName}
-              placeholder="Nombre del evento"
-              onChange={formik.handleChange}
-              value={formik.values.eventName}
-              onBlur={formik.handleBlur}
-              required
-            />
-            <LabelAuth
-              htmlFor="eventName"
-              error={formik.touched.eventName && formik.errors.eventName}
-            ></LabelAuth>
-          </div>
-
-          <div className="flex w-full flex-col">
-            <InputAuth
-              type="text"
-              name="eventLocation"
-              error={
-                formik.touched.eventLocation && formik.errors.eventLocation
-              }
-              placeholder="Ingresá la ubicación"
-              onChange={formik.handleChange}
-              value={formik.values.eventLocation}
-              onBlur={formik.handleBlur}
-              required
-            />
-            <LabelAuth
-              htmlFor="eventLocation"
-              error={
-                formik.touched.eventLocation && formik.errors.eventLocation
-              }
-            ></LabelAuth>
-          </div>
-
-          <div
-            className="flex min-w-full flex-col"
-            onClick={handleClickTextInput}
-          >
-            <input
-              className="h-12 w-full cursor-pointer rounded-[15px] border border-dark pl-4 pr-10 text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none "
-              placeholder="Descripción del evento"
-              value={textArea}
-              readOnly
-            />
-          </div>
-
-          <div className="mt-4  flex w-full flex-col text-dark">
-            <Select
-              options={optionList}
-              styles={customStyles}
-              placeholder="Etiquetas"
-              value={CurrentSelectedOption}
-              onChange={handleChange}
-              readOnly
-              formatOptionLabel={({ label, icon }) => (
-                <div className="flex w-full flex-row items-center gap-4    text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none focus:border-accent active:border-accent ">
-                  {icon} {label}
-                </div>
-              )}
-            />
-            <div className="mt-4 flex flex-wrap gap-2">
-              {Array.from(selectedOptionsList).map((value, index) => (
-                <div
-                  className="flex items-start justify-start gap-2 rounded-[15px] bg-primary px-3 py-1 text-white"
-                  key={index}
-                >
-                  <p className=" text-sm font-normal not-italic leading-6 tracking-[0.25px]">
-                    {value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <button
-            className="btn-primary btn-md  mb-16  mt-72  flex w-[328px] items-center justify-center rounded-[15px] p-4 disabled:bg-grayC disabled:text-grayB"
-            onClick={handleSubmit}
-            disabled={!formik.isValid}
-          >
-            <h1 className="text-center text-sm ">Continuar</h1>
-          </button>
-        </form>
       </div>
     </>
   );
