@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function TopNavCrearEventos({ url, completed }) {
   return (
     <>
-      <div className="flex h-14 w-[360px]  items-center justify-start gap-1 ">
+      <div className="flex h-14 w-[360px]  items-center justify-start gap-1 lg:hidden ">
         <Link to={url}>
           <img src="/crear-eventos/back-arrow.svg" alt="go-back" />
         </Link>
@@ -15,7 +15,7 @@ function TopNavCrearEventos({ url, completed }) {
         </h1>
       </div>
 
-      <div className=" ">
+      <div className="lg:hidden ">
         <div className="flex flex-row items-center justify-center">
           <div
             className={`relative flex h-6 w-6 items-center justify-center rounded-full  text-center ${

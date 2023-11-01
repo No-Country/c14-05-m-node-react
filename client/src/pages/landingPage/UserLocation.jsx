@@ -4,7 +4,7 @@ function UserLocation({namePlace}) {
 
   return (
 
-    <div className='fixed top-0 left-0 bg-white p-4 w-screen'>
+    <div className='block md:hidden'>
       <div className=" flex justify-between">
         <div className="flex">
           <img src="/IconLocation.svg" alt="Icono de ubicación" />
@@ -14,7 +14,7 @@ function UserLocation({namePlace}) {
               : "Permitenos acceder a tu ubicación"}
           </div>
         </div>
-        <img src="/IconNotification.svg" alt="Icono de ubicación" />
+        <img src="/IconNotification.svg" alt="Icono de notificación" />
       </div>
     </div>
   );

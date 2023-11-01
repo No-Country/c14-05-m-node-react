@@ -3,7 +3,6 @@ import InputSearch from "../../components/InputSearch";
 import Title1 from "../../components/Title1";
 import ListEvents from "./ListEvents";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 function index() {
   const [data, setData] = useState([]);
