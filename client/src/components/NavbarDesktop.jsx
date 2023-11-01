@@ -26,7 +26,7 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
     {
       icon: "/iconNavbar/IconProfile.svg",
       linkName: "Perfil",
-      rute: "/",
+      rute: "/logout",
       isLogged: true,
     },
     {
