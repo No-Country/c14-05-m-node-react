@@ -10,6 +10,7 @@ import TopNavCrearEventos from "../../components/TopNavCrearEventos";
 import { optionList } from "../../utils/Categorias";
 import { customStyles } from "../../utils/styleSelect";
 import Cludinary from "./Cloudinary";
+import { provinceList } from "../../utils/Provincias";
 
 function Form() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ function Form() {
   const [selectedOptionsList, setSelectedOptionsList] = useState(new Set());
   const [textArea, setTextArea] = useState("");
   const [Url_Imagen, setUrl_Imagen] = useState("");
+
+  const [selectedProvince, setSelectedProvince] = useState(null);
 
   console.log(textArea);
   const { state } = useLocation();
@@ -64,7 +67,8 @@ function Form() {
       : "Arte";
     const evento = {
       titulo: formik.values.eventName,
-      provincia: "Mendoza",
+      //provincia: "Mendoza",
+      provincia: selectedProvince ? selectedProvince.value : "",
       ubicacion: formik.values.eventLocation,
       descripcion: textArea,
       fecha: "",
@@ -99,6 +103,12 @@ function Form() {
       SetCurrentSelectedOption(selectedOption);
     }
   };
+
+  const handleChange2 = (selectedOption) => {
+    setSelectedProvince(selectedOption);
+    formik.setFieldValue("provincia", selectedOption.value);
+  };
+
   return (
     <>
       <NavbarDesktop />
@@ -203,6 +213,15 @@ function Form() {
                     </div>
                   ))}
                 </div>
+              </div>
+              <div className="mt-4 flex w-full flex-col text-dark">
+                <Select
+                  options={provinceList}
+                  styles={customStyles}
+                  placeholder="Seleccionar provincia"
+                  value={selectedProvince}
+                  onChange={handleChange2}
+                />
               </div>
               <button
                 className="btn-primary btn-md  mb-16  mt-72 flex  w-[328px] items-center justify-center rounded-[15px] p-4 disabled:bg-grayC disabled:text-grayB lg:mt-40"
