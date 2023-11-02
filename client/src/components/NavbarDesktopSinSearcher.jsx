@@ -19,7 +19,7 @@ function NavbarDesktop() {
     {
       icon: "/iconNavbar/IconTicket.svg",
       linkName: "Boletos",
-      rute: "/",
+      rute: "/boletos",
       isLogged: true,
     },
     {

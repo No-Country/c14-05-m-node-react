@@ -21,7 +21,7 @@ function Navbar() {
     {
       icon: "/iconNavbar/IconTicket.svg",
       linkName: "Boletos",
-      rute: "/",
+      rute: "/boletos",
     },
     {
       icon: "/iconNavbar/IconProfile.svg",
