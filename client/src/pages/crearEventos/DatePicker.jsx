@@ -1,7 +1,7 @@
 import { useMaskito } from "@maskito/react";
 import React, { useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import NavbarDesktop from "../../components/NavbarDesktop";
+import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 
 import DateInput from "../../components/DateInput";
 import TimeInput from "../../components/TimeInput";

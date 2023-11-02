@@ -1,24 +1,32 @@
 import axios from "axios";
-import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import NavbarDesktop from "../../components/NavbarDesktop";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 import { UserContext } from "../../components/UserProvider";
 
 function ConfimacionEvento() {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { currentUser } = useContext(UserContext);
+  const [isError, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit() {
-    //tienen que dejar pasar una string mas larga los de back
+    setIsLoading(true);
+    setError(false);
     const id = currentUser?.uid;
     const data = { ...state, userid: id };
-    const apiUrl = "https://api-rvi6.onrender.com/Eventos";
+    const apiUrl = "http://localhost:3001/Eventos";
     //hacemos un post con el state al server
-    console.log(currentUser);
     try {
       const response = await axios.post(apiUrl, data);
+      if (response.status === 201) {
+        navigate("/");
+      }
       console.log(response);
     } catch (error) {
+      setIsLoading(false);
+      setError(true);
       console.log("error");
       console.log(error);
     }

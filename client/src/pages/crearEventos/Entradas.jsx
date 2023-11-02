@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import InputAuth from "../../components/InputAuth";
-import NavbarDesktop from "../../components/NavbarDesktop";
+import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 
 import TopNavCrearEventos from "../../components/TopNavCrearEventos";
 
@@ -43,12 +43,10 @@ function Entradas() {
   return (
     <>
       <TopNavCrearEventos url={"/crearEventos/date"} completed={2} />
-      <nav className="hidden h-20 w-full bg-gray-300 lg:block ">
-        placeholder navbar
-      </nav>
+      <NavbarDesktop />
 
-      <div className="mt-9 flex flex-col items-center justify-center gap-6">
-        <div className="lg:container lg:max-w-3xl">
+      <div className="mt-9 flex flex-col items-center justify-center gap-6 md:mt-24">
+        <div className="md:container lg:max-w-3xl">
           <div className="mb-9 hidden text-4xl font-semibold not-italic leading-10 tracking-[0.25px] text-black lg:flex lg:w-full lg:justify-start ">
             <h1>Entradas</h1>
           </div>

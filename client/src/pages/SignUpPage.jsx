@@ -12,11 +12,15 @@ function RegisterPage() {
   //Despues hay que implementar react query por ahora esto anda
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
-  const apiUrl = "https://api-rvi6.onrender.com/user";
+  const [isLoading, setIsLoading] = useState(false);
+  const apiUrl = "http://localhost:3001/user";
 
   const navigate = useNavigate();
 
   const signWithGoogle = async () => {
+    setIsLoading(true);
+    setError(false);
+
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
       if (user) {
@@ -25,8 +29,9 @@ function RegisterPage() {
         sentNewUserToBackEndGoogle(data);
       }
     } catch (error) {
-      setError(true);
       console.log(error);
+      setError(true);
+      setIsLoading(false);
     }
   };
   const formatGoogleUserData = (user) => {
@@ -46,16 +51,17 @@ function RegisterPage() {
     let response;
     try {
       response = await axios.post(apiUrl, data);
-      if (response.status === 201) {
-        console.log("Usuario Creado");
+      if (response?.status === 201) {
+        setIsLoading(false);
       }
+      navigate("/");
     } catch (error) {
       if (error.response?.status === 409) {
         console.log("El usuario ya existe logueando...");
         navigate("/");
-      } else {
-        setError(true);
       }
+      setIsLoading(false);
+      setError(true);
     }
   };
 
@@ -75,6 +81,7 @@ function RegisterPage() {
     } catch (error) {
       setError(true);
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -110,6 +117,9 @@ function RegisterPage() {
   });
 
   const createNewUser = async (email, password) => {
+    setIsLoading(true);
+    setError(false);
+
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
@@ -122,6 +132,7 @@ function RegisterPage() {
     } catch (error) {
       setError(true);
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -219,12 +230,16 @@ function RegisterPage() {
           ></LabelAuth>
           <div className="flex items-center justify-center">
             <button
-              className="btn-primary btn-md mb-16 mt-8 flex items-center justify-center rounded-[15px] p-4 xl:h-16 xl:w-72 xl:rounded-none"
+              className="btn-primary btn-md mb-16 mt-8 flex w-[328px] items-center justify-center rounded-[15px] p-4 xl:h-16 xl:w-72 xl:rounded-none"
               type="submit"
             >
-              <h1 className="text-center text-sm  text-white 2xl:text-base">
-                Registrarse
-              </h1>
+              {isLoading ? (
+                <span className="loading loading-infinity loading-md lg:loading-lg"></span>
+              ) : (
+                <h1 className="text-center text-sm  text-white 2xl:text-base">
+                  Registrarse
+                </h1>
+              )}
             </button>
           </div>
         </form>
@@ -244,11 +259,11 @@ function RegisterPage() {
           <img src="/IconoGoogle.svg" alt="google icon" />
           <p>Iniciar sesión con Google</p>
         </button>
-        <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
+        {/*         <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
           <img src="/iconoFacebook.svg" alt="facebook icon" />
 
           <p>Iniciar sesión con Facebook</p>
-        </button>
+        </button> */}
       </div>
     </div>
   );
