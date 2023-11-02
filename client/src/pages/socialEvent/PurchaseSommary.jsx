@@ -4,11 +4,22 @@ import CardHorizontal2 from "../../components/CardHorizontal2";
 import Title2 from "../../components/Title2";
 import Info from "../../components/Info";
 import NavbarDesktopSinSearcher from "../../components/NavbarDesktopSinSearcher";
+import axios from "axios";
 
 function PurchaseSommary() {
   const { state } = useLocation();
   let navigate = useNavigate();
+  const apiUrl = "https://api-rvi6.onrender.com/inscripcion"
+  console.log(state)
 
+  let postEntrada = async () => {
+    try {
+      const response = await axios.post(apiUrl,state);
+      console.log('Response Data:', response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <NavbarDesktopSinSearcher />
@@ -50,7 +61,7 @@ function PurchaseSommary() {
               </div>
             </div>
           </div>
-          <div className="fixed bottom-4">
+          <div className="my-4">
             <Info />
             <hr className="mt-8 border border-grayD" />
             <div className="mb-8 flex items-center justify-between">
@@ -65,7 +76,11 @@ function PurchaseSommary() {
             <button
               className="btn-primary w-full rounded-[15px] p-4"
               type="button"
-              onClick={() => navigate("/reserva-finalizada", { state: state })}
+              onClick={() => {
+                navigate("/reserva-finalizada", { state: state })
+                console.log('resumen compra')
+                postEntrada()
+              }}
             >
               Reservar
             </button>

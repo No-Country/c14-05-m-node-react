@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 function EventoConfirmado() {
   const navigate = useNavigate();
   return (
     <>
       <NavbarDesktop />
-
       <div className="flex h-screen items-center justify-center">
         <div className="flex flex-col items-center lg:container lg:mt-0 lg:max-w-xl">
           <img

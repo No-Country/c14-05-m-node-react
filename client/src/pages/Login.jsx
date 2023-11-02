@@ -12,6 +12,7 @@ function Login() {
   const { currentUser } = useContext(UserContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const formik = useFormik({
@@ -34,20 +35,25 @@ function Login() {
   });
 
   const signInWithEmail = async (email, password) => {
+    setIsLoading(true);
+    setError(false);
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
-        const userToken = await user.getIdToken();
         navigate("/");
       }
     } catch (err) {
       setError(true);
+      setIsLoading(false);
       //
       console.log(err.message);
     }
   };
 
   const signWithGoogle = async () => {
+    setIsLoading(true);
+    setError(false);
+
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
       console.log(user);
@@ -58,12 +64,12 @@ function Login() {
     } catch (error) {
       setError(true);
       console.log("Error al logearse ");
+      setIsLoading(false);
     }
   };
   const tooglePassword = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-  console.log(currentUser?.email);
 
   return (
     <>
@@ -129,9 +135,13 @@ function Login() {
                 className=" btn-primary btn-md mb-16 mt-8 flex  w-[90%] items-center justify-center  rounded-[15px] p-4 2xl:h-16"
                 type="submit"
               >
-                <h1 className="text-center text-sm text-white xl:text-base ">
-                  Iniciar sesión
-                </h1>
+                {isLoading ? (
+                  <span className="loading loading-infinity loading-md lg:loading-lg"></span>
+                ) : (
+                  <h1 className="text-center text-sm text-white xl:text-base ">
+                    Iniciar sesión
+                  </h1>
+                )}
               </button>
             </div>
           </form>
@@ -158,11 +168,11 @@ function Login() {
             <img src="/IconoGoogle.svg" alt="google icon" />
             <p>Iniciar sesión con Google</p>
           </button>
-          <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
+          {/*           <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
             <img src="/iconoFacebook.svg" alt="facebook icon" />
 
             <p>Iniciar sesión con Facebook</p>
-          </button>
+          </button> */}
         </div>
       </div>
     </>

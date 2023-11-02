@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import NavbarDesktop from "../../components/NavbarDesktop";
+import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 import { UserContext } from "../../components/UserProvider";
 
 function CrearEventos() {
