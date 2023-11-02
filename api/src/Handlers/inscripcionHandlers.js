@@ -1,22 +1,35 @@
-const { 
+const {
   createInscripcion,
   findInscripcionById,
   updateInscripcion,
   deleteInscripcion,
-  findAllInscripciones
+  findAllInscripciones,
 } = require("../Controllers/inscripcionControllers");
 
 const createInscripcionHandler = async (req, res) => {
   try {
-    const { estaInscripto, isActive, userid, eventoid } = req.body;
+    const {
+      estaInscripto,
+      isActive,
+      userid,
+      eventoid,
+      amount,
+      amountPro,
+      imageBoleto,
+    } = req.body;
     const nuevaInscripcion = await createInscripcion(
       estaInscripto,
       isActive,
       userid,
-      eventoid
+      eventoid,
+      amount,
+      amountPro,
+      imageBoleto
     );
     if (!nuevaInscripcion) {
-      return res.status(409).json({ msg: `No se pudo completar la inscripción` });
+      return res
+        .status(409)
+        .json({ msg: `No se pudo completar la inscripción` });
     }
     res.status(201).json(nuevaInscripcion);
   } catch (error) {
@@ -37,8 +50,16 @@ const findInscripcionHandler = async (req, res) => {
 const updateInscripcionHandler = async (req, res) => {
   try {
     const { inscripcionId } = req.params;
-    const { estaInscripto, isActive } = req.body;
-    const updatedInscripcion = await updateInscripcion(inscripcionId, estaInscripto, isActive);
+    const { estaInscripto, isActive, amount, amountPro, imageBoleto } =
+      req.body;
+    const updatedInscripcion = await updateInscripcion(
+      inscripcionId,
+      estaInscripto,
+      isActive,
+      amount,
+      amountPro,
+      imageBoleto
+    );
     if (!updatedInscripcion) {
       return res.status(404).json({ msg: `La inscripción no fue encontrada` });
     }
@@ -67,12 +88,10 @@ const findAllInscripcionesHandler = async (req, res) => {
   }
 };
 
-
 module.exports = {
   createInscripcionHandler,
   findInscripcionHandler,
   updateInscripcionHandler,
   deleteInscripcionHandler,
-  findAllInscripcionesHandler
+  findAllInscripcionesHandler,
 };
-
