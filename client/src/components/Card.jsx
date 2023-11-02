@@ -1,6 +1,6 @@
-const Card = ({img, title, price, place, date, hour}) => {
+const Card = ({img, title, price, place, date, hour,onClick}) => {
   return (
-    <div className="rounded shadow-lg">
+    <div className="rounded shadow-lg" onClick={onClick}>
       <div className="w-[320px]">
         <img
           src={img}

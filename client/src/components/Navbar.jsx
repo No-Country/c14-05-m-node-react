@@ -30,9 +30,9 @@ function Navbar() {
     },
   ];
   return (
-    <div className="fixed bottom-0 left-0">
+    <div className="fixed bottom-0 left-0 block md:hidden">
       <nav className="flex w-screen justify-center bg-primary p-2">
-        <ul className="flex space-x-2 ml-0">
+        <ul className="ml-0 flex space-x-2">
           {links.map((link, index) => {
             return (
               <li className="w-[60px]" key={index}>

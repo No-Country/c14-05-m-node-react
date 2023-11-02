@@ -1,18 +1,22 @@
-import { useEffect, useState } from 'react'
-import Navbar from '../../components/Navbar'
-import FavoriteEvents from './FavoriteEvents'
-import FavoriteOrganizers from './FavoriteOrganizers'
-import FindEvent from './FindEvent'
-import NextEventYourZone from './NextEventYourZone'
-import UserLocation from "./UserLocation"
-import axios from 'axios';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
+import NavbarDesktop from "../../components/NavbarDesktop";
+
+import FavoriteEvents from "./FavoriteEvents";
+import FavoriteOrganizers from "./FavoriteOrganizers";
+import FindEvent from "./FindEvent";
+import NextEventYourZone from "./NextEventYourZone";
+import UserLocation from "./UserLocation";
+
 
 function LandingPage() {
   const [data, setData] = useState([]);
-  const apiUrl = "http://localhost:3001/Eventos";
+  const apiUrl = "https://api-rvi6.onrender.com/Eventos";
 
   // Get coordinates
   const [location, setLocation] = useState(null);
+  const [searchedEvent, setSearchedEvent] = useState("");
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -61,25 +65,42 @@ function LandingPage() {
         });
     }
   }, [location]);
-  console.log(namePlace)
+
+  const onChangeHandler = (e) => {
+    setSearchedEvent(e.target.value);
+  };
+  const searchMatches = data.filter(function (d) {
+    return d.titulo.includes(searchedEvent);
+  });
   return (
     <>
-      <header>
-        <UserLocation namePlace={namePlace}/>
+      <header className="fixed left-0 right-0 top-0 w-screen border border-b-4 bg-white p-4">
+        <NavbarDesktop
+          namePlace={namePlace}
+          searchedEvent={searchedEvent}
+          onChangeHandler={onChangeHandler}
+        />
+        <UserLocation namePlace={namePlace} />
       </header>
-      <main className='my-[56px]'>
+      <main className={window.innerWidth <= 768 ? "my-[56px]" : "my-[104px]"}>
         <FindEvent />
-        {(data.length>0)&&(namePlace!=null) ? <div>
-          <NextEventYourZone data={data} namePlace={namePlace!=null?namePlace.address.state:""} />
-        <FavoriteOrganizers data={data}/>
-        <FavoriteEvents data={data}/>
-        </div>:<p>No hay eventos</p>}
+        {searchMatches.length > 0 && namePlace != null ? (
+          <div>
+            <NextEventYourZone
+              data={searchMatches}
 
+              namePlace={namePlace != null ? namePlace.address.state : ""}
+            />
+            <FavoriteOrganizers data={data} />
+            <FavoriteEvents data={data} />
+          </div>
+        ) : (
+          <p>No hay eventos</p>
+        )}
       </main>
       <Navbar />
     </>
-
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;

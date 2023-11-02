@@ -6,6 +6,7 @@ import UserProvider from "./components/UserProvider.jsx";
 import "./index.css";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import LoggedUserPage from "./pages/LoggedUserPage.jsx";
 import Login from "./pages/Login.jsx";
 import Onboarding from "./pages/Onboarding/Onboarding.jsx";
 import Preferencias from "./pages/Onboarding/Preferencias.jsx";
@@ -13,6 +14,7 @@ import RegisterPage from "./pages/SignUpPage.jsx";
 import ConfimacionEvento from "./pages/crearEventos/ConfimacionEvento.jsx";
 import DatePicker from "./pages/crearEventos/DatePicker.jsx";
 import Entradas from "./pages/crearEventos/Entradas.jsx";
+import EventoConfirmado from "./pages/crearEventos/EventoConfirmado.jsx";
 import EventoExito from "./pages/crearEventos/EventoExito.jsx";
 import Form from "./pages/crearEventos/Form.jsx";
 import TextAreaDescripcion from "./pages/crearEventos/TextAreaDescripcion.jsx";
@@ -90,7 +92,12 @@ const router = createBrowserRouter([
   {
     path: "boletos",
     element: <Tickets />
-  }
+  },
+  { path: "CrearEventos/evento-confirmado", element: <EventoConfirmado /> },
+  {
+    path: "logout",
+    element: <LoggedUserPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

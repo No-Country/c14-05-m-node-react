@@ -1,19 +1,19 @@
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { auth, googleProvider } from "../../firebase-config";
 import InputAuth from "../components/InputAuth";
 import LabelAuth from "../components/LabelAuth";
 import { UserContext } from "../components/UserProvider";
 import LoggedUserPage from "./LoggedUserPage";
-
 function Login() {
   const { currentUser } = useContext(UserContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
 
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -38,6 +38,7 @@ function Login() {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
         const userToken = await user.getIdToken();
+        navigate("/");
       }
     } catch (err) {
       setError(true);
@@ -52,6 +53,7 @@ function Login() {
       console.log(user);
       if (user) {
         //Esto seria el token que tenemos que mandar al back
+        navigate("/");
       }
     } catch (error) {
       setError(true);
@@ -65,15 +67,15 @@ function Login() {
 
   return (
     <>
-      {currentUser?.email ? (
-        <LoggedUserPage currentUser={currentUser} />
-      ) : (
-        <div className="container mt-52 flex flex-col items-center font-nunito">
+      <div className="sm:flex sm:items-center sm:justify-center">
+        <div className="container mt-52 flex flex-col items-center font-nunito sm:max-w-lg md:rounded-[15px] md:p-10  md:shadow-[0px_0px_15px_0px_rgba(0,0,0,0.15)] 2xl:max-w-[752px] ">
           <form
             onSubmit={formik.handleSubmit}
             className="relative flex  w-full flex-col"
           >
-            <h1 className="mb-4 text-left text-xl  ">Iniciar sesión</h1>
+            <h1 className="mb-4 text-left text-xl font-semibold not-italic leading-8 tracking-[0.15px] sm:text-center sm:text-2xl 2xl:mb-20 2xl:text-4xl 2xl:leading-10 2xl:tracking-[0.25px] ">
+              Iniciar sesión
+            </h1>
             <InputAuth
               type="email"
               name="email"
@@ -108,7 +110,7 @@ function Login() {
               />
 
               <span
-                className="absolute bottom-[13px] right-4 cursor-pointer "
+                className=" absolute bottom-[13px] right-4 cursor-pointer "
                 onClick={tooglePassword}
               >
                 <img
@@ -122,45 +124,47 @@ function Login() {
               htmlFor="password"
               error={formik.touched.password && formik.errors.password}
             ></LabelAuth>
-            <button
-              className="btn-primary btn-md mb-16 mt-8 flex items-center justify-center rounded-[15px] p-4"
-              type="submit"
-            >
-              <h1 className="text-center text-sm text-white ">
-                Iniciar sesión
-              </h1>
-            </button>
+            <div className="flex items-center justify-center">
+              <button
+                className=" btn-primary btn-md mb-16 mt-8 flex  w-[90%] items-center justify-center  rounded-[15px] p-4 2xl:h-16"
+                type="submit"
+              >
+                <h1 className="text-center text-sm text-white xl:text-base ">
+                  Iniciar sesión
+                </h1>
+              </button>
+            </div>
           </form>
           {isError ? (
-            <span className="text center text-error">
+            <span className="text center text-error xl:text-lg">
               <h1>Email o Contraseña incorrecto</h1>
             </span>
           ) : (
             ""
           )}
 
-          <h2 className="text-center text-base font-normal text-dark ">
+          <h2 className="text-center text-base font-normal text-dark xl:mb-8 2xl:text-lg ">
             ¿No tenés cuenta?
             <Link to={"../signup"} className="ml-1 font-bold">
               Registrate
             </Link>
             .
           </h2>
-          <div className="mb-8 mt-4 h-[1px] w-72 bg-grayB"></div>
+          <div className="mb-8 mt-4 h-[1px] w-72 bg-grayB xl:hidden "></div>
           <button
-            className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90"
+            className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none"
             onClick={signWithGoogle}
           >
             <img src="/IconoGoogle.svg" alt="google icon" />
             <p>Iniciar sesión con Google</p>
           </button>
-          <button className="hover:opacity-85 mb-5  flex h-12 w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90">
+          <button className="hover:opacity-85 mb-5 flex h-12  w-[90%] items-center justify-center gap-4 rounded-[14px] border border-dark p-[10px] outline-none active:bg-gray-200 active:opacity-90 xl:h-14 xl:rounded-none">
             <img src="/iconoFacebook.svg" alt="facebook icon" />
 
             <p>Iniciar sesión con Facebook</p>
           </button>
         </div>
-      )}
+      </div>
     </>
   );
 }
