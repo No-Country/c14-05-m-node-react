@@ -19,13 +19,13 @@ function ReservationFinalized() {
           Recordá que podes pagar tu entrada en ventanilla hasta antes de
           ingresar al evento
         </p>
-        {/* <button
+        <button
           className="btn-primary mb-4 w-full rounded-[15px] p-4"
           type="button"
           onClick={() => navigate("/resumen-compra", { state: state })}
         >
           Ver reserva
-        </button> */}
+        </button>
 
         <button
           className="w-full rounded-[15px] border border-primary p-4 text-primary"
