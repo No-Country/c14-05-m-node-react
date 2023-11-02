@@ -27,7 +27,7 @@ function DatePicker() {
     <>
       <NavbarDesktop />
 
-      <div className="flex flex-col items-center justify-center lg:mt-4">
+      <div className="flex flex-col items-center justify-center lg:mt-40">
         <TopNavCrearEventos url={"/crearEventos/Form"} completed={1} />
         <div className="flex flex-col items-center lg:container lg:max-w-3xl">
           <div className="flex w-full flex-col justify-start">
