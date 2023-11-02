@@ -13,7 +13,6 @@ import UserLocation from "./UserLocation";
 function LandingPage() {
   const [data, setData] = useState([]);
   const apiUrl = "https://api-rvi6.onrender.com/Eventos";
-
   // Get coordinates
   const [location, setLocation] = useState(null);
   const [searchedEvent, setSearchedEvent] = useState("");
@@ -44,7 +43,7 @@ function LandingPage() {
 
   // Get name place
   const [namePlace, setNamePlace] = useState(null);
-
+  console.log('namePlace',namePlace)
   useEffect(() => {
     if (location && location.latitude !== null && location.longitude !== null) {
       const apiKey = import.meta.env.VITE_LOCATION_IQ;
@@ -72,6 +71,7 @@ function LandingPage() {
   const searchMatches = data.filter(function (d) {
     return d.titulo.includes(searchedEvent);
   });
+  console.log('searchMatches',searchMatches)
   return (
     <>
       <header className="fixed left-0 right-0 top-0 w-screen border border-b-4 bg-white p-4">

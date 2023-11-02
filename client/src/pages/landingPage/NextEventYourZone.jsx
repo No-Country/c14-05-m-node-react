@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 function NextEventYourZone({ data, namePlace }) {
   let navigate = useNavigate();
   const eventInMyZone = data.filter(
-    (d) => d.provincia.toLowerCase() == namePlace.toLowerCase(),
+    (d) => d.ubicacion.toLowerCase() == namePlace.toLowerCase(),
   );
   return (
     <section className="m-4 ">

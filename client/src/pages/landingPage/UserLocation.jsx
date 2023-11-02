@@ -1,7 +1,7 @@
 import React from "react";
 
 function UserLocation({namePlace}) {
-
+  console.log(namePlace)
   return (
 
     <div className='block md:hidden'>
