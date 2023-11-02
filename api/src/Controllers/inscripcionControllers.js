@@ -1,6 +1,14 @@
 const { Inscripcion, user, Eventos } = require("../db");
 
-const createInscripcion = async (estaInscripto, isActive, userid, eventoid) => {
+const createInscripcion = async (
+  estaInscripto,
+  isActive,
+  userid,
+  eventoid,
+  amount,
+  amountPro,
+  imageBoleto
+) => {
   console.log(userid);
   console.log(eventoid);
   const userFound = await user.findByPk(userid);
@@ -20,6 +28,9 @@ const createInscripcion = async (estaInscripto, isActive, userid, eventoid) => {
     const nuevaInscripcion = await Inscripcion.create({
       estaInscripto,
       isActive,
+      amount,
+      amountPro,
+      imageBoleto,
     });
     await nuevaInscripcion.setUser(userFound);
     await nuevaInscripcion.setEvento(eventFound);
@@ -34,11 +45,22 @@ const findInscripcionById = async (inscripcionId) => {
   return inscripcion;
 };
 
-const updateInscripcion = async (inscripcionId, estaInscripto, isActive) => {
+const updateInscripcion = async (
+  inscripcionId,
+  estaInscripto,
+  isActive,
+  amount,
+  amountPro,
+  imageBoleto
+) => {
   const inscripcion = await Inscripcion.findByPk(inscripcionId);
   if (inscripcion) {
     inscripcion.estaInscripto = estaInscripto;
     inscripcion.isActive = isActive;
+    inscripcion.amount = amount;
+    inscripcion.amountPro = amountPro;
+    inscripcion.imageBoleto = imageBoleto;
+
     await inscripcion.save();
     return inscripcion;
   } else {
@@ -58,14 +80,10 @@ const findAllInscripciones = async () => {
   return allInscripciones;
 };
 
-
-
-
 module.exports = {
   createInscripcion,
   findInscripcionById,
   updateInscripcion,
   deleteInscripcion,
-  findAllInscripciones
+  findAllInscripciones,
 };
-
