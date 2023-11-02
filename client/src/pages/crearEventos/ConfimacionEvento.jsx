@@ -21,7 +21,7 @@ function ConfimacionEvento() {
     try {
       const response = await axios.post(apiUrl, data);
       if (response.status === 201) {
-        navigate("CrearEventos/evento-confirmado");
+        navigate("/CrearEventos/evento-confirmado");
       }
       console.log(response);
     } catch (error) {
