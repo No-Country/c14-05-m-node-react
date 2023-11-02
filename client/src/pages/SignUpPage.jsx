@@ -13,7 +13,7 @@ function RegisterPage() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const apiUrl = "http://localhost:3001/user";
+  const apiUrl = "https://api-rvi6.onrender.com/user";
 
   const navigate = useNavigate();
 

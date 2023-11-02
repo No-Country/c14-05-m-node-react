@@ -16,12 +16,12 @@ function ConfimacionEvento() {
     setError(false);
     const id = currentUser?.uid;
     const data = { ...state, userid: id };
-    const apiUrl = "http://localhost:3001/Eventos";
+    const apiUrl = "https://api-rvi6.onrender.com/Eventos";
     //hacemos un post con el state al server
     try {
       const response = await axios.post(apiUrl, data);
       if (response.status === 201) {
-        navigate("/");
+        navigate("CrearEventos/evento-confirmado");
       }
       console.log(response);
     } catch (error) {
