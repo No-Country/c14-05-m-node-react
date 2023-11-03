@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import CardHorizontal from "../../components/CardHorizontal";
 import Navbar from "../../components/Navbar";
 import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 import { UserContext } from "../../components/UserProvider";
