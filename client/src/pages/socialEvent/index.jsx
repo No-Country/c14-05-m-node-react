@@ -26,11 +26,13 @@ function index() {
   }, []);
 
   const onChangeHandler = (e) => {
-    setSearchedEvent(e.target.value);
+    setSearchedEvent(e.target.value.toLowerCase());
   };
   const searchMatches = data.filter(function (d) {
-    return d.titulo.includes(searchedEvent);
+    return d.titulo.toLowerCase().includes(searchedEvent);
   });
+  console.log('searchedEvent',searchedEvent)
+  console.log('searchMatches',searchMatches)
   return (
     <div className="mb-[72px]">
       <Title1 title={"Eventos"} />
