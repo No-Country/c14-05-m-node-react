@@ -8,6 +8,7 @@ import LabelAuth from "../../components/LabelAuth";
 import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 import TopNavCrearEventos from "../../components/TopNavCrearEventos";
 import { optionList } from "../../utils/Categorias";
+import { provinceList } from "../../utils/Provincias";
 import { customStyles } from "../../utils/styleSelect";
 import Cludinary from "./Cloudinary";
 
@@ -17,8 +18,8 @@ function Form() {
   const [selectedOptionsList, setSelectedOptionsList] = useState(new Set());
   const [textArea, setTextArea] = useState("");
   const [Url_Imagen, setUrl_Imagen] = useState("");
+  const [selectedProvince, setSelectedProvince] = useState(null);
 
-  console.log(textArea);
   const { state } = useLocation();
   useEffect(() => {
     if (state?.Description?.length > 1) {
@@ -30,6 +31,10 @@ function Form() {
     if (state?.etiquetas) {
       setSelectedOptionsList(state.etiquetas);
     }
+    if(state?.provincia) {
+      setSelectedProvince(state.provincia)
+    }
+  
     if (state?.name || state?.Description || state?.Location) {
       console.log("test");
       formik.setFieldTouched("eventName", true);
@@ -64,14 +69,15 @@ function Form() {
       : "Arte";
     const evento = {
       titulo: formik.values.eventName,
-      provincia: "Mendoza",
+      //provincia: "Mendoza",
+      provincia: selectedProvince ? selectedProvince.value : "",
       ubicacion: formik.values.eventLocation,
       descripcion: textArea,
       fecha: "",
       hora: "",
       costo: "",
       image: Url_Imagen,
-      etiquetas: "Música",
+      etiquetas: etiquetas,
       isActive: "true",
       userid: "",
     };
@@ -86,6 +92,7 @@ function Form() {
       Location: formik.values.eventLocation,
       etiquetas: selectedOptionsList,
       image: Url_Imagen,
+      provincia: selectedProvince ? selectedProvince : "",
     };
 
     navigate("/CrearEventos/textarea ", { state: state });
@@ -99,6 +106,12 @@ function Form() {
       SetCurrentSelectedOption(selectedOption);
     }
   };
+
+  const handleChange2 = (selectedOption) => {
+    setSelectedProvince(selectedOption);
+    formik.setFieldValue("provincia", selectedOption.value);
+  };
+
   return (
     <>
       <NavbarDesktop />
@@ -113,7 +126,7 @@ function Form() {
                   Descripcion
                 </h1>
               </div>
-              <div class="mb-4 mt-12 w-full items-center justify-center ">
+              <div className="mb-4 mt-12 w-full items-center justify-center ">
                 {Url_Imagen ? (
                   <img
                     src={Url_Imagen}
@@ -170,13 +183,24 @@ function Form() {
                 onClick={handleClickTextInput}
               >
                 <input
-                  className="h-12 w-full cursor-pointer rounded-[15px] border border-dark pl-4 pr-10 text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none "
+                  className="h-12 w-full cursor-pointer rounded-[15px] border lg:h-14 lg:rounded-[20px] border-dark pl-4 pr-10 text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none "
                   placeholder="Descripción del evento"
                   value={textArea}
                   readOnly
                 />
               </div>
 
+
+              <div className="mt-4 flex w-full flex-col text-dark">
+                <Select
+                  options={provinceList}
+                  styles={customStyles}
+                  placeholder="Seleccionar provincia"
+                  value={selectedProvince}
+                  onChange={handleChange2}
+                  defaultValue={selectedProvince}
+                />
+              </div>
               <div className="mt-4  flex w-full flex-col text-dark">
                 <Select
                   options={optionList}
@@ -184,6 +208,7 @@ function Form() {
                   placeholder="Etiquetas"
                   value={CurrentSelectedOption}
                   onChange={handleChange}
+                  selectedOption
                   readOnly
                   formatOptionLabel={({ label, icon }) => (
                     <div className="flex w-full flex-row items-center gap-4    text-base font-normal not-italic leading-4 tracking-[0.1px] text-dark outline-none focus:border-accent active:border-accent ">

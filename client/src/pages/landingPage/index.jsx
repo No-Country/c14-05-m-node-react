@@ -9,7 +9,6 @@ import FindEvent from "./FindEvent";
 import NextEventYourZone from "./NextEventYourZone";
 import UserLocation from "./UserLocation";
 
-
 function LandingPage() {
   const [data, setData] = useState([]);
   const apiUrl = "https://api-rvi6.onrender.com/Eventos";
@@ -88,7 +87,6 @@ function LandingPage() {
           <div>
             <NextEventYourZone
               data={searchMatches}
-
               namePlace={namePlace != null ? namePlace.address.state : ""}
             />
             <FavoriteOrganizers data={data} />
