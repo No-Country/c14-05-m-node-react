@@ -65,12 +65,12 @@ function LandingPage() {
   }, [location]);
 
   const onChangeHandler = (e) => {
-    setSearchedEvent(e.target.value);
+    setSearchedEvent(e.target.value.toLowerCase());
   };
   const searchMatches = data.filter(function (d) {
-    return d.titulo.includes(searchedEvent);
+    return d.titulo.toLowerCase().includes(searchedEvent);
   });
-  console.log('searchMatches',searchMatches)
+
   return (
     <>
       <header className="fixed left-0 right-0 top-0 w-screen border border-b-4 bg-white p-4">
