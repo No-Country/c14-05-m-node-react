@@ -51,10 +51,13 @@ function NavbarDesktop({ namePlace, searchedEvent, onChangeHandler }) {
   return (
     <div className=" hidden md:block ">
       <div className="flex items-center justify-between ">
-        <div>
+        {/* <div>
           <span className="text-primary">Even</span>
           <span className="text-accent">Flow</span>
-        </div>
+        </div> */}
+        <Link to="/">
+        <img src="/logo-eventflow.svg" alt="logo del evento" />
+        </Link>
         <InputSearch
           searchedEvent={searchedEvent}
           onChangeHandler={onChangeHandler}

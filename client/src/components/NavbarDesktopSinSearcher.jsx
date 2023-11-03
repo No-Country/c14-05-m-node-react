@@ -39,20 +39,26 @@ function NavbarDesktop() {
       isLogged: false,
     },
   ];
-  let userLinks = []
+  let userLinks = [];
   const { currentUser } = useContext(UserContext);
-  if(currentUser?.email){
-    userLinks = links.filter(link=>link.isLogged==true)
-  }else{
-    userLinks = links.filter(link=>link.isLogged==false)
+  if (currentUser?.email) {
+    userLinks = links.filter((link) => link.isLogged == true);
+  } else {
+    userLinks = links.filter((link) => link.isLogged == false);
   }
 
   return (
-    <div className=" hidden md:block fixed left-0 right-0 top-0 w-screen border border-b-4 bg-white p-4 mb-[-1rem]">
+    <div className=" fixed left-0 right-0 top-0 mb-[-1rem] hidden w-screen border border-b-4 bg-white p-4 md:block">
       <div className="flex items-center justify-between ">
-        <div><span className="text-primary">Even</span><span className="text-accent">Flow</span></div>
+        {/* <div>
+          <span className="text-primary">Even</span>
+          <span className="text-accent">Flow</span>
+        </div> */}
+        <Link to={"/"}>
+        <img src="/logo-eventflow.svg" alt="logo del evento" />
+        </Link>
         <nav className="">
-          <ul className="ml-0 flex space-x-4 mr-[50px]">
+          <ul className="ml-0 mr-[50px] flex space-x-4">
             {userLinks.map((link, index) => {
               return (
                 <li className="" key={index}>
