@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import CardHorizontal from "../../components/CardHorizontal";
 import Navbar from "../../components/Navbar";
 import NavbarDesktop from "../../components/NavbarDesktopSinSearcher";
 import { UserContext } from "../../components/UserProvider";
@@ -18,7 +19,7 @@ function CrearEventos() {
   }
   const filterUserEvents = (data) => {
     const currentUserEvents = data?.filter(
-      (events) => events?.userId == currentUser?.uid,
+      (event) => event?.userId == currentUser?.uid,
     );
     setEventos(currentUserEvents);
   };
@@ -66,12 +67,29 @@ function CrearEventos() {
           </div>
 
           <div className="mb-40 mt-24 flex flex-col items-center justify-center lg:mt-10  ">
-            <img
+
+          {
+            eventos.length > 0  ? (eventos?.map((d, index) =>{
+              <CardHorizontal
+                key={index}
+                img={d.image}
+                title={d.titulo}
+                date={d.fecha}
+                hour={d.hora}
+                place={d.ubicacion}
+                price={d.costo}
+                /> })) :  <>
+                <img
               src="/crear-eventos/emptyeventos.png"
               className="w-64 text-center text-base font-medium not-italic leading-4 tracking-[0.4px] text-dark lg:w-72"
               alt=""
             />
             <p className="lg:text-base">No tienes ningun eventos activo</p>
+            </>
+
+
+          }
+        
           </div>
           <div className="flex justify-center">
             <button
