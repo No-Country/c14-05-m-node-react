@@ -9,13 +9,26 @@ import axios from "axios";
 function PurchaseSommary() {
   const { state } = useLocation();
   let navigate = useNavigate();
-  const apiUrl = "https://api-rvi6.onrender.com/inscripcion"
-  console.log(state)
+  const apiUrl = "https://api-rvi6.onrender.com/inscripcion";
+  //const apiUrl = "http://localhost:3001/inscripcion";
+  console.log(state);
 
   let postEntrada = async () => {
     try {
-      const response = await axios.post(apiUrl,state);
-      console.log('Response Data:', response.data);
+      // const response = await axios.post(apiUrl,state);
+      // console.log('Response Data:', response.data);
+      const dataToPost = {
+        estaInscripto: "true",
+        isActive: "true",
+        amount: state.costo,
+        amountPro: state.amountPro,
+        imageBoleto: state.image,
+        userid: state.userId,
+        eventoid: state.id,
+      };
+      console.log("esto es dataToPost: ", JSON.stringify(dataToPost));
+      const response = await axios.post(apiUrl, dataToPost);
+      console.log("Response Data:", response.data);
     } catch (error) {
       console.log(error);
     }
@@ -77,9 +90,9 @@ function PurchaseSommary() {
               className="btn-primary w-full rounded-[15px] p-4"
               type="button"
               onClick={() => {
-                navigate("/reserva-finalizada", { state: state })
-                console.log('resumen compra')
-                postEntrada()
+                navigate("/reserva-finalizada", { state: state });
+                console.log("resumen compra");
+                postEntrada();
               }}
             >
               Reservar

@@ -11,9 +11,9 @@ import UserLocation from "./UserLocation";
 
 function LandingPage() {
   const [data, setData] = useState([]);
-  //const apiUrl = "https://api-rvi6.onrender.com/Eventos";
-  const apiUrl = "http://localhost:3001/Eventos";
-  // Get coordinates
+  const apiUrl = "https://api-rvi6.onrender.com/Eventos";
+  //const apiUrl = "http://localhost:3001/Eventos";
+  //Get coordinates
   const [location, setLocation] = useState(null);
   const [searchedEvent, setSearchedEvent] = useState("");
 
